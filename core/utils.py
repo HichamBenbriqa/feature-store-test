@@ -6,18 +6,12 @@ S3, and machine learning model operations. It includes functionality for monitor
 Feature Store operations, managing data in S3, feature engineering, and model training.
 
 The module provides utilities for:
+- Logging
 - Feature group creation monitoring
 - Offline store data availability checking
 - Feature value extraction
 - Feature engineering from historical data
 - Model training and persistence
-
-Dependencies:
-    - boto3: AWS SDK for Python
-    - pandas: Data manipulation and analysis
-    - scikit-learn: Machine learning utilities
-    - pickle: Model serialization
-    - time: Time-related functions
 
 Note:
     These utilities are designed to work with AWS services and require appropriate

@@ -10,22 +10,6 @@ Constants Categories:
     - Data File Paths: Locations of various data files used in the system
     - Model Configuration: Feature lists and model file locations
     - Training Configuration: Feature and target variable definitions
-
-Note:
-    All paths are relative to the project root directory.
-    Ensure all referenced directories exist before running the system.
-
-Usage:
-    from core import constants
-
-    # Access feature group name
-    feature_group = constants.FEATURE_GROUP_NAME
-
-    # Load data using defined paths
-    raw_data = pd.read_csv(constants.RAW_DATA_PATH)
-
-    # Get training features
-    features = constants.TRAINING_FEATURES
 """
 
 FEATURE_GROUP_NAME = "customer_purchase_features"

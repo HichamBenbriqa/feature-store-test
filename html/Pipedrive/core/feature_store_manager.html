@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.5">
+<title>Pipedrive.core.feature_store_manager API documentation</title>
+<meta name="description" content="SageMaker Feature Store Management Module …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>Pipedrive.core.feature_store_manager</code></h1>
+</header>
+<section id="section-intro">
+<p>SageMaker Feature Store Management Module</p>
+<p>This module provides a comprehensive interface for managing customer features
+in Amazon SageMaker Feature Store.</p>
+<p>It handles both online and offline feature storage, feature ingestion,
+and retrieval operations for customer purchase and loyalty data.</p>
+<p>The module implements a FeatureStoreManager class that abstracts the complexity of:
+- Creating and managing feature groups
+- Ingesting new feature data
+- Building training datasets
+- Managing customer-specific feature operations
+- Handling both batch and real-time feature updates</p>
+<h2 id="note">Note</h2>
+<p>This module requires appropriate AWS credentials and permissions to interact with
+SageMaker Feature Store and S3 services.</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="Pipedrive.core.feature_store_manager.FeatureStoreManager"><code class="flex name class">
+<span>class <span class="ident">FeatureStoreManager</span></span>
+<span>(</span><span>feature_store_session: sagemaker.session.Session,<br>s3_bucket_name: str,<br>feature_store_runtime,<br>aws_role: str,<br>logger: logging.Logger)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class FeatureStoreManager:
+    &#34;&#34;&#34;
+    A manager class for handling Amazon SageMaker Feature Store operations.
+
+    This class provides functionality to create and manage feature groups, ingest features,
+    build training datasets, and handle customer-specific feature operations in both
+    online and offline feature stores.
+
+    Attributes:
+        feature_store_session (Session): SageMaker session for Feature Store operations
+        s3_bucket_name (str): Name of the S3 bucket for storing offline features
+        feature_store_runtime: Runtime client for Feature Store operations
+        aws_role (str): AWS IAM role ARN with necessary permissions
+        feature_group (FeatureGroup): Feature group instance for storing customer features
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        feature_store_session: Session,
+        s3_bucket_name: str,
+        feature_store_runtime,
+        aws_role: str,
+        logger: logging.Logger,
+    ):
+        &#34;&#34;&#34;
+        Initialize the FeatureStoreManager with necessary AWS resources.
+
+        Args:
+            feature_store_session (Session): SageMaker session for Feature Store operations
+            s3_bucket_name (str): Name of the S3 bucket for storing offline features
+            feature_store_runtime: Runtime client for Feature Store operations
+            aws_role (str): AWS IAM role ARN with necessary permissions
+            logger (logging.Logger): unified logger object
+        &#34;&#34;&#34;
+        self.feature_store_session = feature_store_session
+        self.s3_bucket_name = s3_bucket_name
+        self.feature_store_runtime = feature_store_runtime
+        self.aws_role = aws_role
+        self.feature_group = None
+        self.logger = logger
+
+    def create_feature_group(self):
+        &#34;&#34;&#34;
+        Create a new feature group with predefined feature definitions.
+
+        Creates a feature group with customer-related features including purchase history
+        and loyalty scores. Enables both online and offline stores, with data stored in
+        the specified S3 bucket location.
+
+        Raises:
+            Exception: If feature group creation fails
+        &#34;&#34;&#34;
+        self.feature_group = FeatureGroup(
+            name=constants.FEATURE_GROUP_NAME,
+            feature_definitions=[
+                FeatureDefinition(&#34;customer_id&#34;, FeatureTypeEnum.STRING),
+                FeatureDefinition(&#34;purchase_timestamp&#34;, FeatureTypeEnum.STRING),
+                FeatureDefinition(&#34;latest_purchase_value&#34;, FeatureTypeEnum.FRACTIONAL),
+                FeatureDefinition(&#34;avg_purchase_value&#34;, FeatureTypeEnum.FRACTIONAL),
+                FeatureDefinition(&#34;avg_loyalty_score&#34;, FeatureTypeEnum.FRACTIONAL),
+                FeatureDefinition(&#34;latest_loyalty_score&#34;, FeatureTypeEnum.FRACTIONAL),
+            ],
+            sagemaker_session=self.feature_store_session,
+        )
+
+        self.feature_group.create(
+            s3_uri=f&#34;s3://{self.s3_bucket_name}/feature-store/customer_features&#34;,
+            record_identifier_name=&#34;customer_id&#34;,
+            event_time_feature_name=&#34;purchase_timestamp&#34;,
+            role_arn=self.aws_role,
+            enable_online_store=True,
+        )
+
+        utils.wait_for_feature_group_creation_complete(
+            self.feature_group, logger=self.logger
+        )
+
+    def ingest_features(self, features_df):
+        &#34;&#34;&#34;
+        Ingest features from a DataFrame into the Feature Store.
+
+        Args:
+            features_df (pandas.DataFrame): DataFrame containing feature values to ingest
+
+        Note:
+            The DataFrame must contain columns matching the feature definitions
+            in the feature group.
+        &#34;&#34;&#34;
+        self.feature_group.ingest(data_frame=features_df, max_workers=1, wait=True)
+
+    def build_training_dataset(self):
+        &#34;&#34;&#34;
+        Build a training dataset by querying the Feature Store using Athena.
+
+        Returns:
+            pandas.DataFrame: DataFrame containing the latest feature values for each customer
+
+        Raises:
+            Exception: If query execution fails or data retrieval encounters an error
+        &#34;&#34;&#34;
+        try:
+            customer_query = self.feature_group.athena_query()
+            customer_table = customer_query.table_name
+
+            query_string = f&#34;&#34;&#34;SELECT customer_id,
+                                       latest_purchase_value,
+                                       avg_purchase_value,
+                                       avg_loyalty_score,
+                                       latest_loyalty_score
+                                FROM &#34;{customer_table}&#34;
+                                ORDER BY customer_id, purchase_timestamp DESC&#34;&#34;&#34;
+
+            customer_query.run(
+                query_string=query_string,
+                output_location=f&#34;s3://{self.s3_bucket_name}/query_results/&#34;,
+            )
+            customer_query.wait()
+            train_df = customer_query.as_dataframe()
+            return train_df
+
+        except Exception as e:
+            self.logger.error(f&#34;Error in build_training_dataset: {str(e)}&#34;)
+            raise
+
+    def customer_features_exist(self, customer_id):
+        &#34;&#34;&#34;
+        Check if features exist for a given customer ID in the online store.
+
+        Args:
+            customer_id (str): The customer ID to check
+
+        Returns:
+            bool: True if customer features exist, False otherwise
+        &#34;&#34;&#34;
+        response = self.feature_store_runtime.get_record(
+            FeatureGroupName=constants.FEATURE_GROUP_NAME,
+            RecordIdentifierValueAsString=customer_id,
+        )
+        if &#34;Record&#34; not in response:
+            self.logger.warning(f&#34;{customer_id} has no records in the feature store&#34;)
+            return False
+        return True
+
+    def get_latest_features(self, customer_id):
+        &#34;&#34;&#34;
+        Retrieve the latest feature values for a customer from the online store.
+
+        Args:
+            customer_id (str): The customer ID to retrieve features for
+
+        Returns:
+            dict: Dictionary containing the latest feature values for the customer
+
+        Note:
+            Returns features including latest purchase value, average purchase value,
+            latest loyalty score, and average loyalty score.
+        &#34;&#34;&#34;
+        response = self.feature_store_runtime.get_record(
+            FeatureGroupName=&#34;customer_purchase_features&#34;,
+            RecordIdentifierValueAsString=customer_id,
+        )
+
+        record = response[&#34;Record&#34;]
+
+        customer_features = {
+            &#34;customer_id&#34;: utils.get_feature_value(record, &#34;customer_id&#34;),
+            &#34;purchase_timestamp&#34;: utils.get_feature_value(record, &#34;purchase_timestamp&#34;),
+            &#34;latest_purchase_value&#34;: utils.get_feature_value(
+                record, &#34;latest_purchase_value&#34;
+            ),
+            &#34;avg_purchase_value&#34;: utils.get_feature_value(record, &#34;avg_purchase_value&#34;),
+            &#34;avg_loyalty_score&#34;: utils.get_feature_value(record, &#34;avg_loyalty_score&#34;),
+            &#34;latest_loyalty_score&#34;: utils.get_feature_value(
+                record, &#34;latest_loyalty_score&#34;
+            ),
+        }
+
+        return customer_features
+
+    def add_customer_features(self, customer_id, new_purchase_value, new_loyalty_score):
+        &#34;&#34;&#34;
+        Add initial features for a new customer to the Feature Store.
+
+        Args:
+            customer_id (str): The customer ID to add features for
+            new_purchase_value (float): The value of the customer&#39;s first purchase
+            new_loyalty_score (float): The initial loyalty score for the customer
+
+        Returns:
+            dict: Dictionary containing the newly added feature values
+
+        Note:
+            For new customers, the average values are initialized to match
+            the first purchase value and loyalty score.
+        &#34;&#34;&#34;
+        current_time = datetime.now().strftime(&#34;%Y-%m-%dT%H:%M:%S.%fZ&#34;)
+
+        record = {
+            &#34;customer_id&#34;: str(customer_id),
+            &#34;purchase_timestamp&#34;: current_time,
+            &#34;latest_purchase_value&#34;: str(new_purchase_value),
+            &#34;avg_purchase_value&#34;: str(new_purchase_value),
+            &#34;avg_loyalty_score&#34;: str(new_loyalty_score),
+            &#34;latest_loyalty_score&#34;: str(new_loyalty_score),
+        }
+
+        self.feature_store_runtime.put_record(
+            FeatureGroupName=self.feature_group.name,
+            Record=[{&#34;FeatureName&#34;: k, &#34;ValueAsString&#34;: v} for k, v in record.items()],
+        )
+
+        return record
+
+    def update_customer_features(
+        self, customer_id, new_purchase_value, new_loyalty_score
+    ):
+        &#34;&#34;&#34;
+        Update existing customer features with new purchase data and loyalty score.
+
+        Args:
+            customer_id (str): The customer ID to update features for
+            new_purchase_value (float): The value of the customer&#39;s latest purchase
+            new_loyalty_score (float): The latest predicted loyalty score
+
+        Returns:
+            dict: Dictionary containing the updated feature values
+
+        Note:
+            Updates both latest values and recalculates averages based on
+            previous values and new data.
+        &#34;&#34;&#34;
+        current_features = self.get_latest_features(customer_id)
+
+        old_avg_purchase = float(current_features[&#34;avg_purchase_value&#34;])
+        new_avg_purchase = (old_avg_purchase + new_purchase_value) / 2
+
+        old_avg_loyalty = float(current_features[&#34;avg_loyalty_score&#34;])
+        new_avg_loyalty = (old_avg_loyalty + new_loyalty_score) / 2
+
+        current_time = datetime.now().strftime(&#34;%Y-%m-%dT%H:%M:%S.%fZ&#34;)
+
+        record = {
+            &#34;customer_id&#34;: str(customer_id),
+            &#34;purchase_timestamp&#34;: current_time,
+            &#34;latest_purchase_value&#34;: str(new_purchase_value),
+            &#34;avg_purchase_value&#34;: str(new_avg_purchase),
+            &#34;avg_loyalty_score&#34;: str(new_avg_loyalty),
+            &#34;latest_loyalty_score&#34;: str(new_loyalty_score),
+        }
+
+        self.feature_store_runtime.put_record(
+            FeatureGroupName=self.feature_group.name,
+            Record=[{&#34;FeatureName&#34;: k, &#34;ValueAsString&#34;: v} for k, v in record.items()],
+        )
+
+        return record</code></pre>
+</details>
+<div class="desc"><p>A manager class for handling Amazon SageMaker Feature Store operations.</p>
+<p>This class provides functionality to create and manage feature groups, ingest features,
+build training datasets, and handle customer-specific feature operations in both
+online and offline feature stores.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>feature_store_session</code></strong> :&ensp;<code>Session</code></dt>
+<dd>SageMaker session for Feature Store operations</dd>
+<dt><strong><code>s3_bucket_name</code></strong> :&ensp;<code>str</code></dt>
+<dd>Name of the S3 bucket for storing offline features</dd>
+<dt><strong><code>feature_store_runtime</code></strong></dt>
+<dd>Runtime client for Feature Store operations</dd>
+<dt><strong><code>aws_role</code></strong> :&ensp;<code>str</code></dt>
+<dd>AWS IAM role ARN with necessary permissions</dd>
+<dt><strong><code>feature_group</code></strong> :&ensp;<code>FeatureGroup</code></dt>
+<dd>Feature group instance for storing customer features</dd>
+</dl>
+<p>Initialize the FeatureStoreManager with necessary AWS resources.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>feature_store_session</code></strong> :&ensp;<code>Session</code></dt>
+<dd>SageMaker session for Feature Store operations</dd>
+<dt><strong><code>s3_bucket_name</code></strong> :&ensp;<code>str</code></dt>
+<dd>Name of the S3 bucket for storing offline features</dd>
+<dt><strong><code>feature_store_runtime</code></strong></dt>
+<dd>Runtime client for Feature Store operations</dd>
+<dt><strong><code>aws_role</code></strong> :&ensp;<code>str</code></dt>
+<dd>AWS IAM role ARN with necessary permissions</dd>
+<dt><strong><code>logger</code></strong> :&ensp;<code>logging.Logger</code></dt>
+<dd>unified logger object</dd>
+</dl></div>
+<h3>Methods</h3>
+<dl>
+<dt id="Pipedrive.core.feature_store_manager.FeatureStoreManager.add_customer_features"><code class="name flex">
+<span>def <span class="ident">add_customer_features</span></span>(<span>self, customer_id, new_purchase_value, new_loyalty_score)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_customer_features(self, customer_id, new_purchase_value, new_loyalty_score):
+    &#34;&#34;&#34;
+    Add initial features for a new customer to the Feature Store.
+
+    Args:
+        customer_id (str): The customer ID to add features for
+        new_purchase_value (float): The value of the customer&#39;s first purchase
+        new_loyalty_score (float): The initial loyalty score for the customer
+
+    Returns:
+        dict: Dictionary containing the newly added feature values
+
+    Note:
+        For new customers, the average values are initialized to match
+        the first purchase value and loyalty score.
+    &#34;&#34;&#34;
+    current_time = datetime.now().strftime(&#34;%Y-%m-%dT%H:%M:%S.%fZ&#34;)
+
+    record = {
+        &#34;customer_id&#34;: str(customer_id),
+        &#34;purchase_timestamp&#34;: current_time,
+        &#34;latest_purchase_value&#34;: str(new_purchase_value),
+        &#34;avg_purchase_value&#34;: str(new_purchase_value),
+        &#34;avg_loyalty_score&#34;: str(new_loyalty_score),
+        &#34;latest_loyalty_score&#34;: str(new_loyalty_score),
+    }
+
+    self.feature_store_runtime.put_record(
+        FeatureGroupName=self.feature_group.name,
+        Record=[{&#34;FeatureName&#34;: k, &#34;ValueAsString&#34;: v} for k, v in record.items()],
+    )
+
+    return record</code></pre>
+</details>
+<div class="desc"><p>Add initial features for a new customer to the Feature Store.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>customer_id</code></strong> :&ensp;<code>str</code></dt>
+<dd>The customer ID to add features for</dd>
+<dt><strong><code>new_purchase_value</code></strong> :&ensp;<code>float</code></dt>
+<dd>The value of the customer's first purchase</dd>
+<dt><strong><code>new_loyalty_score</code></strong> :&ensp;<code>float</code></dt>
+<dd>The initial loyalty score for the customer</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>Dictionary containing the newly added feature values</dd>
+</dl>
+<h2 id="note">Note</h2>
+<p>For new customers, the average values are initialized to match
+the first purchase value and loyalty score.</p></div>
+</dd>
+<dt id="Pipedrive.core.feature_store_manager.FeatureStoreManager.build_training_dataset"><code class="name flex">
+<span>def <span class="ident">build_training_dataset</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def build_training_dataset(self):
+    &#34;&#34;&#34;
+    Build a training dataset by querying the Feature Store using Athena.
+
+    Returns:
+        pandas.DataFrame: DataFrame containing the latest feature values for each customer
+
+    Raises:
+        Exception: If query execution fails or data retrieval encounters an error
+    &#34;&#34;&#34;
+    try:
+        customer_query = self.feature_group.athena_query()
+        customer_table = customer_query.table_name
+
+        query_string = f&#34;&#34;&#34;SELECT customer_id,
+                                   latest_purchase_value,
+                                   avg_purchase_value,
+                                   avg_loyalty_score,
+                                   latest_loyalty_score
+                            FROM &#34;{customer_table}&#34;
+                            ORDER BY customer_id, purchase_timestamp DESC&#34;&#34;&#34;
+
+        customer_query.run(
+            query_string=query_string,
+            output_location=f&#34;s3://{self.s3_bucket_name}/query_results/&#34;,
+        )
+        customer_query.wait()
+        train_df = customer_query.as_dataframe()
+        return train_df
+
+    except Exception as e:
+        self.logger.error(f&#34;Error in build_training_dataset: {str(e)}&#34;)
+        raise</code></pre>
+</details>
+<div class="desc"><p>Build a training dataset by querying the Feature Store using Athena.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>pandas.DataFrame</code></dt>
+<dd>DataFrame containing the latest feature values for each customer</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>Exception</code></dt>
+<dd>If query execution fails or data retrieval encounters an error</dd>
+</dl></div>
+</dd>
+<dt id="Pipedrive.core.feature_store_manager.FeatureStoreManager.create_feature_group"><code class="name flex">
+<span>def <span class="ident">create_feature_group</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_feature_group(self):
+    &#34;&#34;&#34;
+    Create a new feature group with predefined feature definitions.
+
+    Creates a feature group with customer-related features including purchase history
+    and loyalty scores. Enables both online and offline stores, with data stored in
+    the specified S3 bucket location.
+
+    Raises:
+        Exception: If feature group creation fails
+    &#34;&#34;&#34;
+    self.feature_group = FeatureGroup(
+        name=constants.FEATURE_GROUP_NAME,
+        feature_definitions=[
+            FeatureDefinition(&#34;customer_id&#34;, FeatureTypeEnum.STRING),
+            FeatureDefinition(&#34;purchase_timestamp&#34;, FeatureTypeEnum.STRING),
+            FeatureDefinition(&#34;latest_purchase_value&#34;, FeatureTypeEnum.FRACTIONAL),
+            FeatureDefinition(&#34;avg_purchase_value&#34;, FeatureTypeEnum.FRACTIONAL),
+            FeatureDefinition(&#34;avg_loyalty_score&#34;, FeatureTypeEnum.FRACTIONAL),
+            FeatureDefinition(&#34;latest_loyalty_score&#34;, FeatureTypeEnum.FRACTIONAL),
+        ],
+        sagemaker_session=self.feature_store_session,
+    )
+
+    self.feature_group.create(
+        s3_uri=f&#34;s3://{self.s3_bucket_name}/feature-store/customer_features&#34;,
+        record_identifier_name=&#34;customer_id&#34;,
+        event_time_feature_name=&#34;purchase_timestamp&#34;,
+        role_arn=self.aws_role,
+        enable_online_store=True,
+    )
+
+    utils.wait_for_feature_group_creation_complete(
+        self.feature_group, logger=self.logger
+    )</code></pre>
+</details>
+<div class="desc"><p>Create a new feature group with predefined feature definitions.</p>
+<p>Creates a feature group with customer-related features including purchase history
+and loyalty scores. Enables both online and offline stores, with data stored in
+the specified S3 bucket location.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>Exception</code></dt>
+<dd>If feature group creation fails</dd>
+</dl></div>
+</dd>
+<dt id="Pipedrive.core.feature_store_manager.FeatureStoreManager.customer_features_exist"><code class="name flex">
+<span>def <span class="ident">customer_features_exist</span></span>(<span>self, customer_id)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def customer_features_exist(self, customer_id):
+    &#34;&#34;&#34;
+    Check if features exist for a given customer ID in the online store.
+
+    Args:
+        customer_id (str): The customer ID to check
+
+    Returns:
+        bool: True if customer features exist, False otherwise
+    &#34;&#34;&#34;
+    response = self.feature_store_runtime.get_record(
+        FeatureGroupName=constants.FEATURE_GROUP_NAME,
+        RecordIdentifierValueAsString=customer_id,
+    )
+    if &#34;Record&#34; not in response:
+        self.logger.warning(f&#34;{customer_id} has no records in the feature store&#34;)
+        return False
+    return True</code></pre>
+</details>
+<div class="desc"><p>Check if features exist for a given customer ID in the online store.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>customer_id</code></strong> :&ensp;<code>str</code></dt>
+<dd>The customer ID to check</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool</code></dt>
+<dd>True if customer features exist, False otherwise</dd>
+</dl></div>
+</dd>
+<dt id="Pipedrive.core.feature_store_manager.FeatureStoreManager.get_latest_features"><code class="name flex">
+<span>def <span class="ident">get_latest_features</span></span>(<span>self, customer_id)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_latest_features(self, customer_id):
+    &#34;&#34;&#34;
+    Retrieve the latest feature values for a customer from the online store.
+
+    Args:
+        customer_id (str): The customer ID to retrieve features for
+
+    Returns:
+        dict: Dictionary containing the latest feature values for the customer
+
+    Note:
+        Returns features including latest purchase value, average purchase value,
+        latest loyalty score, and average loyalty score.
+    &#34;&#34;&#34;
+    response = self.feature_store_runtime.get_record(
+        FeatureGroupName=&#34;customer_purchase_features&#34;,
+        RecordIdentifierValueAsString=customer_id,
+    )
+
+    record = response[&#34;Record&#34;]
+
+    customer_features = {
+        &#34;customer_id&#34;: utils.get_feature_value(record, &#34;customer_id&#34;),
+        &#34;purchase_timestamp&#34;: utils.get_feature_value(record, &#34;purchase_timestamp&#34;),
+        &#34;latest_purchase_value&#34;: utils.get_feature_value(
+            record, &#34;latest_purchase_value&#34;
+        ),
+        &#34;avg_purchase_value&#34;: utils.get_feature_value(record, &#34;avg_purchase_value&#34;),
+        &#34;avg_loyalty_score&#34;: utils.get_feature_value(record, &#34;avg_loyalty_score&#34;),
+        &#34;latest_loyalty_score&#34;: utils.get_feature_value(
+            record, &#34;latest_loyalty_score&#34;
+        ),
+    }
+
+    return customer_features</code></pre>
+</details>
+<div class="desc"><p>Retrieve the latest feature values for a customer from the online store.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>customer_id</code></strong> :&ensp;<code>str</code></dt>
+<dd>The customer ID to retrieve features for</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>Dictionary containing the latest feature values for the customer</dd>
+</dl>
+<h2 id="note">Note</h2>
+<p>Returns features including latest purchase value, average purchase value,
+latest loyalty score, and average loyalty score.</p></div>
+</dd>
+<dt id="Pipedrive.core.feature_store_manager.FeatureStoreManager.ingest_features"><code class="name flex">
+<span>def <span class="ident">ingest_features</span></span>(<span>self, features_df)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ingest_features(self, features_df):
+    &#34;&#34;&#34;
+    Ingest features from a DataFrame into the Feature Store.
+
+    Args:
+        features_df (pandas.DataFrame): DataFrame containing feature values to ingest
+
+    Note:
+        The DataFrame must contain columns matching the feature definitions
+        in the feature group.
+    &#34;&#34;&#34;
+    self.feature_group.ingest(data_frame=features_df, max_workers=1, wait=True)</code></pre>
+</details>
+<div class="desc"><p>Ingest features from a DataFrame into the Feature Store.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>features_df</code></strong> :&ensp;<code>pandas.DataFrame</code></dt>
+<dd>DataFrame containing feature values to ingest</dd>
+</dl>
+<h2 id="note">Note</h2>
+<p>The DataFrame must contain columns matching the feature definitions
+in the feature group.</p></div>
+</dd>
+<dt id="Pipedrive.core.feature_store_manager.FeatureStoreManager.update_customer_features"><code class="name flex">
+<span>def <span class="ident">update_customer_features</span></span>(<span>self, customer_id, new_purchase_value, new_loyalty_score)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_customer_features(
+    self, customer_id, new_purchase_value, new_loyalty_score
+):
+    &#34;&#34;&#34;
+    Update existing customer features with new purchase data and loyalty score.
+
+    Args:
+        customer_id (str): The customer ID to update features for
+        new_purchase_value (float): The value of the customer&#39;s latest purchase
+        new_loyalty_score (float): The latest predicted loyalty score
+
+    Returns:
+        dict: Dictionary containing the updated feature values
+
+    Note:
+        Updates both latest values and recalculates averages based on
+        previous values and new data.
+    &#34;&#34;&#34;
+    current_features = self.get_latest_features(customer_id)
+
+    old_avg_purchase = float(current_features[&#34;avg_purchase_value&#34;])
+    new_avg_purchase = (old_avg_purchase + new_purchase_value) / 2
+
+    old_avg_loyalty = float(current_features[&#34;avg_loyalty_score&#34;])
+    new_avg_loyalty = (old_avg_loyalty + new_loyalty_score) / 2
+
+    current_time = datetime.now().strftime(&#34;%Y-%m-%dT%H:%M:%S.%fZ&#34;)
+
+    record = {
+        &#34;customer_id&#34;: str(customer_id),
+        &#34;purchase_timestamp&#34;: current_time,
+        &#34;latest_purchase_value&#34;: str(new_purchase_value),
+        &#34;avg_purchase_value&#34;: str(new_avg_purchase),
+        &#34;avg_loyalty_score&#34;: str(new_avg_loyalty),
+        &#34;latest_loyalty_score&#34;: str(new_loyalty_score),
+    }
+
+    self.feature_store_runtime.put_record(
+        FeatureGroupName=self.feature_group.name,
+        Record=[{&#34;FeatureName&#34;: k, &#34;ValueAsString&#34;: v} for k, v in record.items()],
+    )
+
+    return record</code></pre>
+</details>
+<div class="desc"><p>Update existing customer features with new purchase data and loyalty score.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>customer_id</code></strong> :&ensp;<code>str</code></dt>
+<dd>The customer ID to update features for</dd>
+<dt><strong><code>new_purchase_value</code></strong> :&ensp;<code>float</code></dt>
+<dd>The value of the customer's latest purchase</dd>
+<dt><strong><code>new_loyalty_score</code></strong> :&ensp;<code>float</code></dt>
+<dd>The latest predicted loyalty score</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>Dictionary containing the updated feature values</dd>
+</dl>
+<h2 id="note">Note</h2>
+<p>Updates both latest values and recalculates averages based on
+previous values and new data.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="Pipedrive.core" href="index.html">Pipedrive.core</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="Pipedrive.core.feature_store_manager.FeatureStoreManager" href="#Pipedrive.core.feature_store_manager.FeatureStoreManager">FeatureStoreManager</a></code></h4>
+<ul class="">
+<li><code><a title="Pipedrive.core.feature_store_manager.FeatureStoreManager.add_customer_features" href="#Pipedrive.core.feature_store_manager.FeatureStoreManager.add_customer_features">add_customer_features</a></code></li>
+<li><code><a title="Pipedrive.core.feature_store_manager.FeatureStoreManager.build_training_dataset" href="#Pipedrive.core.feature_store_manager.FeatureStoreManager.build_training_dataset">build_training_dataset</a></code></li>
+<li><code><a title="Pipedrive.core.feature_store_manager.FeatureStoreManager.create_feature_group" href="#Pipedrive.core.feature_store_manager.FeatureStoreManager.create_feature_group">create_feature_group</a></code></li>
+<li><code><a title="Pipedrive.core.feature_store_manager.FeatureStoreManager.customer_features_exist" href="#Pipedrive.core.feature_store_manager.FeatureStoreManager.customer_features_exist">customer_features_exist</a></code></li>
+<li><code><a title="Pipedrive.core.feature_store_manager.FeatureStoreManager.get_latest_features" href="#Pipedrive.core.feature_store_manager.FeatureStoreManager.get_latest_features">get_latest_features</a></code></li>
+<li><code><a title="Pipedrive.core.feature_store_manager.FeatureStoreManager.ingest_features" href="#Pipedrive.core.feature_store_manager.FeatureStoreManager.ingest_features">ingest_features</a></code></li>
+<li><code><a title="Pipedrive.core.feature_store_manager.FeatureStoreManager.update_customer_features" href="#Pipedrive.core.feature_store_manager.FeatureStoreManager.update_customer_features">update_customer_features</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.5</a>.</p>
+</footer>
+</body>
+</html>

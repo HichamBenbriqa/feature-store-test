@@ -10,17 +10,7 @@ The workflow includes:
 2. Feature group creation and data ingestion
 3. Model training with historical data
 4. Real-time inference pipeline execution
-5. Validation testing of feature store operations
 
-Dependencies:
-    - boto3: AWS SDK for Python
-    - pandas: Data manipulation and analysis
-    - sagemaker: Amazon SageMaker Python SDK
-    - python-dotenv: Environment variable management
-    - core: Custom project modules
-
-Environment Variables Required:
-    - AWS_ROLE: AWS IAM role ARN with necessary permissions
 
 Note:
     Ensure all required AWS credentials and permissions are properly configured

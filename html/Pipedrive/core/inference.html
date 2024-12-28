@@ -1,0 +1,789 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.5">
+<title>Pipedrive.core.inference API documentation</title>
+<meta name="description" content="Real-Time Customer Loyalty Prediction Module …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>Pipedrive.core.inference</code></h1>
+</header>
+<section id="section-intro">
+<p>Real-Time Customer Loyalty Prediction Module</p>
+<p>This module implements real-time inference capabilities for predicting customer loyalty scores
+based on purchase behavior and historical data. It integrates with SageMaker Feature Store
+for feature management and provides both batch and single-event prediction capabilities.</p>
+<p>The module handles:
+- Loading and managing ML models for inference
+- Processing real-time purchase events
+- Retrieving and updating customer features
+- Managing the complete inference pipeline for batch predictions
+- Integration with Feature Store for persistent storage</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="Pipedrive.core.inference.RealTimeInference"><code class="flex name class">
+<span>class <span class="ident">RealTimeInference</span></span>
+<span>(</span><span>feature_store_manager: core.feature_store_manager.FeatureStoreManager,<br>data_path: str = 'data/inference_data.csv',<br>model_path: str = 'models/loyalty_predictor.pkl',<br>logger: logging.Logger = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class RealTimeInference:
+    &#34;&#34;&#34;
+    A class for handling real-time customer loyalty predictions and feature updates.
+
+    This class manages the entire inference process, from loading the model and data
+    to processing events and updating the feature store with new predictions.
+
+    Attributes:
+        feature_store_manager (FeatureStoreManager): Manager for feature store operations
+        data_path (str): Path to the inference data file
+        model_path (str): Path to the serialized model file
+        inference_data (pandas.DataFrame): Loaded inference data
+        model: Loaded prediction model
+        logger (logging.Logger): unified logger object
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        feature_store_manager: FeatureStoreManager,
+        data_path: str = constants.INFERENCE_DATA_PATH,
+        model_path: str = constants.MODEL_PATH,
+        logger: logging.Logger = None,
+    ):
+        &#34;&#34;&#34;
+        Initialize the RealTimeInference instance.
+
+        Args:
+            feature_store_manager (FeatureStoreManager): Manager for feature store operations
+            data_path (str, optional): Path to inference data.
+                                       Defaults to constants.INFERENCE_DATA_PATH
+            model_path (str, optional): Path to model file. Defaults to constants.MODEL_PATH
+
+        Raises:
+            FileNotFoundError: If model_path is invalid
+            pickle.UnpicklingError: If model file is corrupted
+        &#34;&#34;&#34;
+        self.feature_store_manager = feature_store_manager
+        self.data_path = data_path
+        self.inference_data = None
+        self.logger = logger
+        with open(model_path, &#34;rb&#34;) as f:
+            self.model = pickle.load(f)
+
+    def get_inference_data(self):
+        &#34;&#34;&#34;
+        Load and prepare inference data from the specified CSV file.
+
+        Loads the data, converts timestamp columns to datetime format,
+        and sorts records by timestamp in ascending order.
+
+        Raises:
+            FileNotFoundError: If data_path is invalid
+            pd.errors.EmptyDataError: If CSV file is empty
+        &#34;&#34;&#34;
+        self.inference_data = pd.read_csv(self.data_path)
+        self.inference_data[&#34;purchase_timestamp&#34;] = pd.to_datetime(
+            self.inference_data[&#34;purchase_timestamp&#34;]
+        )
+        self.inference_data = self.inference_data.sort_values(
+            &#34;purchase_timestamp&#34;, ascending=True
+        )
+
+    def enrich_event(self, customer_exists, event):
+        &#34;&#34;&#34;Enrich purchase event with historical features for prediction.
+
+        Combines current purchase data with historical features if customer exists in feature store,
+        otherwise uses default values:
+            - avg_purchase_value=current purchase value
+            - avg_loyalty_score=0
+
+        Args:
+            customer_exists (bool): Whether customer has existing feature store record
+            event (dict): Purchase event containing &#39;customer_id&#39; and &#39;purchase_value&#39;
+
+        Returns:
+            dict: Features for prediction:
+                - latest_purchase_value: Current purchase amount
+                - avg_purchase_value: Historical average or current amount if new customer
+                - avg_loyalty_score: Historical average or 0 if new customer
+        &#34;&#34;&#34;
+        customer_id = event[&#34;customer_id&#34;]
+        purchase_value = float(event[&#34;purchase_value&#34;])
+
+        if customer_exists:
+            customer_features = self.feature_store_manager.get_latest_features(
+                customer_id
+            )
+            return {
+                &#34;latest_purchase_value&#34;: purchase_value,
+                &#34;avg_purchase_value&#34;: float(customer_features[&#34;avg_purchase_value&#34;]),
+                &#34;avg_loyalty_score&#34;: float(customer_features[&#34;avg_loyalty_score&#34;]),
+            }
+
+        return {
+            &#34;latest_purchase_value&#34;: purchase_value,
+            &#34;avg_purchase_value&#34;: purchase_value,
+            &#34;avg_loyalty_score&#34;: 0,
+        }
+
+    def predict(self, features):
+        &#34;&#34;&#34;
+        Generate loyalty score prediction for given features.
+        Args:
+            features (dict): Feature dictionary containing:
+                - latest_purchase_value (float)
+                - avg_purchase_value (float)
+                - avg_loyalty_score (float)
+        Returns:
+            float: Predicted loyalty score
+        &#34;&#34;&#34;
+        # Convert features to DataFrame with named columns
+        feature_df = pd.DataFrame(
+            [
+                [
+                    features[&#34;latest_purchase_value&#34;],
+                    features[&#34;avg_purchase_value&#34;],
+                    features[&#34;avg_loyalty_score&#34;],
+                ]
+            ],
+            columns=[
+                &#34;latest_purchase_value&#34;,
+                &#34;avg_purchase_value&#34;,
+                &#34;avg_loyalty_score&#34;,
+            ],
+        )
+
+        return self.model.predict(feature_df)[0]
+
+    def insert_customer_features(
+        self, customer_exists, customer_id, purchase_amount, prediction
+    ):
+        &#34;&#34;&#34;Update or insert customer features in feature store.
+
+        Either updates existing customer record or creates new one based on customer_exists flag.
+
+        Args:
+            customer_exists (bool): Whether customer has existing feature store record
+            customer_id (str): Customer identifier
+            purchase_amount (float): Current purchase value
+            prediction (float): Predicted loyalty score to store as latest_loyalty_score
+        &#34;&#34;&#34;
+
+        if customer_exists:
+            self.logger.debug(f&#34;Updating the records of the customer: {customer_id}&#34;)
+            self.feature_store_manager.update_customer_features(
+                customer_id,
+                purchase_amount,
+                prediction,  # Use predicted loyalty score as the new latest_loyalty_score
+            )
+        else:
+            self.logger.debug(f&#34;Inserting the records of the customer: {customer_id}&#34;)
+            self.feature_store_manager.add_customer_features(
+                customer_id, purchase_amount, prediction
+            )
+
+    def process_single_event(self, row):
+        &#34;&#34;&#34;
+        Process a single event (purchase) for a customer,
+        including feature enrichment and prediction.
+
+        This function simulates network latency,
+        checks if the customer exists in the feature store,
+        enriches the event data, makes a prediction,
+        and updates the feature store with the new data.
+
+        Args:
+            row (pandas.Series): A row from the inference data containing customer
+                                 and purchase information.
+                                 Expected to have &#39;customer_id&#39;, &#39;purchase_value&#39;,
+                                 and &#39;purchase_timestamp&#39; fields.
+        &#34;&#34;&#34;
+        if random.random() &lt; 0.2:  # 20% chance of high latency
+            delay = random.uniform(1, 3)  # High delay
+            self.logger.debug(f&#34;Waiting for High delay: {delay}&#34;)
+            time.sleep(delay)
+
+        else:
+            delay = random.uniform(0.1, 0.5)  # Normal delay
+            self.logger.debug(f&#34;Waiting for Normal delay: {delay}&#34;)
+            time.sleep(delay)
+        customer_exists = self.feature_store_manager.customer_features_exist(
+            str(row[&#34;customer_id&#34;])
+        )
+        event = {
+            &#34;customer_id&#34;: str(row[&#34;customer_id&#34;]),
+            &#34;purchase_value&#34;: row[&#34;purchase_value&#34;],
+            &#34;timestamp&#34;: row[&#34;purchase_timestamp&#34;],
+        }
+
+        features = self.enrich_event(customer_exists, event)
+        prediction = self.predict(features)
+
+        self.insert_customer_features(
+            customer_exists,
+            str(row[&#34;customer_id&#34;]),
+            row[&#34;purchase_value&#34;],
+            prediction,
+        )
+
+    def inference_pipeline(self):
+        &#34;&#34;&#34;
+        Execute real-time inference pipeline for streaming predictions.
+
+        This method processes the inference data, simulating a real-time streaming environment.
+        It handles network delays, potential message loss,
+        and includes a retry mechanism for failed events.
+
+        The pipeline performs the following steps:
+        1. Loads and prepares the inference data.
+        2. Iterates through each event (row) in the data.
+        3. Simulates network issues and handles failed events.
+        4. Processes each event using the `process_single_event` method.
+        5. Attempts to retry any failed events.
+
+        Returns:
+            pandas.DataFrame: The processed inference data, potentially including new predictions
+                              or updates made during the pipeline execution.
+
+        Raises:
+            Any exceptions not caught during individual event processing or retries will be propagated.
+        &#34;&#34;&#34;
+        self.get_inference_data()
+
+        failed_events = []  # Store failed events for retry
+        self.logger.info(f&#34;Total Events: {self.inference_data.shape}&#34;)
+        for _, row in self.inference_data.iterrows():
+            self.logger.info(f&#34;Received event: {row[&#39;customer_id&#39;]} &#34;)
+            if random.random() &lt; 0.05:
+                self.logger.warning(
+                    f&#34;Network issue for customer {row[&#39;customer_id&#39;]} - Adding to retry queue&#34;
+                )
+                failed_events.append(row)
+                continue
+            try:
+                self.process_single_event(row)
+
+            except Exception as e:  # pylint: disable=W0718
+                self.logger.error(
+                    f&#34;Error processing event for customer {row[&#39;customer_id&#39;]}: {e}&#34;
+                )
+                failed_events.append(row)
+
+        if failed_events:
+            self.logger.info(f&#34;Retrying {len(failed_events)} failed events...&#34;)
+            for row in failed_events:
+                self.logger.info(f&#34;Re-handling event: {row[&#39;customer_id&#39;]} &#34;)
+                try:
+                    self.process_single_event(row)
+                except Exception as e:  # pylint: disable=W0718
+                    self.logger.error(
+                        f&#34;Failed to process event for customer {row[&#39;customer_id&#39;]} after retry: {e}&#34;
+                    )
+
+        return self.inference_data
+
+    # def inference_pipeline(self):
+    #     &#34;&#34;&#34;
+    #     Execute the complete inference pipeline for batch predictions.
+
+    #     The pipeline:
+    #     1. Loads and prepares inference data
+    #     2. Processes each purchase event
+    #     3. Generates predictions for each event
+    #     4. Updates the feature store with new predictions
+    #     5. Adds predictions to the inference data
+
+    #     Returns:
+    #         pandas.DataFrame: Original inference data enriched with predictions
+
+    #     Note:
+    #         This method modifies the internal inference_data attribute by
+    #         adding a &#39;predictions&#39; column with the generated predictions.
+    #     &#34;&#34;&#34;
+    #     self.get_inference_data()
+    #     results = []
+
+    #     for _, row in self.inference_data.iterrows():
+    #         event = {
+    #             &#34;customer_id&#34;: str(row[&#34;customer_id&#34;]),
+    #             &#34;purchase_value&#34;: row[&#34;purchase_value&#34;],
+    #         }
+    #         features = self.process_event(event)
+    #         prediction = self.predict(features)
+    #         self.insert_customer_features(
+    #             str(row[&#34;customer_id&#34;]), row[&#34;purchase_value&#34;], prediction
+    #         )
+    #         results.append(prediction)
+
+    #     self.inference_data[&#34;predictions&#34;] = results
+    #     return self.inference_data</code></pre>
+</details>
+<div class="desc"><p>A class for handling real-time customer loyalty predictions and feature updates.</p>
+<p>This class manages the entire inference process, from loading the model and data
+to processing events and updating the feature store with new predictions.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>feature_store_manager</code></strong> :&ensp;<code>FeatureStoreManager</code></dt>
+<dd>Manager for feature store operations</dd>
+<dt><strong><code>data_path</code></strong> :&ensp;<code>str</code></dt>
+<dd>Path to the inference data file</dd>
+<dt><strong><code>model_path</code></strong> :&ensp;<code>str</code></dt>
+<dd>Path to the serialized model file</dd>
+<dt><strong><code>inference_data</code></strong> :&ensp;<code>pandas.DataFrame</code></dt>
+<dd>Loaded inference data</dd>
+<dt><strong><code>model</code></strong></dt>
+<dd>Loaded prediction model</dd>
+<dt><strong><code>logger</code></strong> :&ensp;<code>logging.Logger</code></dt>
+<dd>unified logger object</dd>
+</dl>
+<p>Initialize the RealTimeInference instance.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>feature_store_manager</code></strong> :&ensp;<code>FeatureStoreManager</code></dt>
+<dd>Manager for feature store operations</dd>
+<dt><strong><code>data_path</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Path to inference data.
+Defaults to constants.INFERENCE_DATA_PATH</dd>
+<dt><strong><code>model_path</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Path to model file. Defaults to constants.MODEL_PATH</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>FileNotFoundError</code></dt>
+<dd>If model_path is invalid</dd>
+<dt><code>pickle.UnpicklingError</code></dt>
+<dd>If model file is corrupted</dd>
+</dl></div>
+<h3>Methods</h3>
+<dl>
+<dt id="Pipedrive.core.inference.RealTimeInference.enrich_event"><code class="name flex">
+<span>def <span class="ident">enrich_event</span></span>(<span>self, customer_exists, event)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def enrich_event(self, customer_exists, event):
+    &#34;&#34;&#34;Enrich purchase event with historical features for prediction.
+
+    Combines current purchase data with historical features if customer exists in feature store,
+    otherwise uses default values:
+        - avg_purchase_value=current purchase value
+        - avg_loyalty_score=0
+
+    Args:
+        customer_exists (bool): Whether customer has existing feature store record
+        event (dict): Purchase event containing &#39;customer_id&#39; and &#39;purchase_value&#39;
+
+    Returns:
+        dict: Features for prediction:
+            - latest_purchase_value: Current purchase amount
+            - avg_purchase_value: Historical average or current amount if new customer
+            - avg_loyalty_score: Historical average or 0 if new customer
+    &#34;&#34;&#34;
+    customer_id = event[&#34;customer_id&#34;]
+    purchase_value = float(event[&#34;purchase_value&#34;])
+
+    if customer_exists:
+        customer_features = self.feature_store_manager.get_latest_features(
+            customer_id
+        )
+        return {
+            &#34;latest_purchase_value&#34;: purchase_value,
+            &#34;avg_purchase_value&#34;: float(customer_features[&#34;avg_purchase_value&#34;]),
+            &#34;avg_loyalty_score&#34;: float(customer_features[&#34;avg_loyalty_score&#34;]),
+        }
+
+    return {
+        &#34;latest_purchase_value&#34;: purchase_value,
+        &#34;avg_purchase_value&#34;: purchase_value,
+        &#34;avg_loyalty_score&#34;: 0,
+    }</code></pre>
+</details>
+<div class="desc"><p>Enrich purchase event with historical features for prediction.</p>
+<p>Combines current purchase data with historical features if customer exists in feature store,
+otherwise uses default values:
+- avg_purchase_value=current purchase value
+- avg_loyalty_score=0</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>customer_exists</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Whether customer has existing feature store record</dd>
+<dt><strong><code>event</code></strong> :&ensp;<code>dict</code></dt>
+<dd>Purchase event containing 'customer_id' and 'purchase_value'</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>Features for prediction:
+- latest_purchase_value: Current purchase amount
+- avg_purchase_value: Historical average or current amount if new customer
+- avg_loyalty_score: Historical average or 0 if new customer</dd>
+</dl></div>
+</dd>
+<dt id="Pipedrive.core.inference.RealTimeInference.get_inference_data"><code class="name flex">
+<span>def <span class="ident">get_inference_data</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_inference_data(self):
+    &#34;&#34;&#34;
+    Load and prepare inference data from the specified CSV file.
+
+    Loads the data, converts timestamp columns to datetime format,
+    and sorts records by timestamp in ascending order.
+
+    Raises:
+        FileNotFoundError: If data_path is invalid
+        pd.errors.EmptyDataError: If CSV file is empty
+    &#34;&#34;&#34;
+    self.inference_data = pd.read_csv(self.data_path)
+    self.inference_data[&#34;purchase_timestamp&#34;] = pd.to_datetime(
+        self.inference_data[&#34;purchase_timestamp&#34;]
+    )
+    self.inference_data = self.inference_data.sort_values(
+        &#34;purchase_timestamp&#34;, ascending=True
+    )</code></pre>
+</details>
+<div class="desc"><p>Load and prepare inference data from the specified CSV file.</p>
+<p>Loads the data, converts timestamp columns to datetime format,
+and sorts records by timestamp in ascending order.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>FileNotFoundError</code></dt>
+<dd>If data_path is invalid</dd>
+<dt><code>pd.errors.EmptyDataError</code></dt>
+<dd>If CSV file is empty</dd>
+</dl></div>
+</dd>
+<dt id="Pipedrive.core.inference.RealTimeInference.inference_pipeline"><code class="name flex">
+<span>def <span class="ident">inference_pipeline</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def inference_pipeline(self):
+    &#34;&#34;&#34;
+    Execute real-time inference pipeline for streaming predictions.
+
+    This method processes the inference data, simulating a real-time streaming environment.
+    It handles network delays, potential message loss,
+    and includes a retry mechanism for failed events.
+
+    The pipeline performs the following steps:
+    1. Loads and prepares the inference data.
+    2. Iterates through each event (row) in the data.
+    3. Simulates network issues and handles failed events.
+    4. Processes each event using the `process_single_event` method.
+    5. Attempts to retry any failed events.
+
+    Returns:
+        pandas.DataFrame: The processed inference data, potentially including new predictions
+                          or updates made during the pipeline execution.
+
+    Raises:
+        Any exceptions not caught during individual event processing or retries will be propagated.
+    &#34;&#34;&#34;
+    self.get_inference_data()
+
+    failed_events = []  # Store failed events for retry
+    self.logger.info(f&#34;Total Events: {self.inference_data.shape}&#34;)
+    for _, row in self.inference_data.iterrows():
+        self.logger.info(f&#34;Received event: {row[&#39;customer_id&#39;]} &#34;)
+        if random.random() &lt; 0.05:
+            self.logger.warning(
+                f&#34;Network issue for customer {row[&#39;customer_id&#39;]} - Adding to retry queue&#34;
+            )
+            failed_events.append(row)
+            continue
+        try:
+            self.process_single_event(row)
+
+        except Exception as e:  # pylint: disable=W0718
+            self.logger.error(
+                f&#34;Error processing event for customer {row[&#39;customer_id&#39;]}: {e}&#34;
+            )
+            failed_events.append(row)
+
+    if failed_events:
+        self.logger.info(f&#34;Retrying {len(failed_events)} failed events...&#34;)
+        for row in failed_events:
+            self.logger.info(f&#34;Re-handling event: {row[&#39;customer_id&#39;]} &#34;)
+            try:
+                self.process_single_event(row)
+            except Exception as e:  # pylint: disable=W0718
+                self.logger.error(
+                    f&#34;Failed to process event for customer {row[&#39;customer_id&#39;]} after retry: {e}&#34;
+                )
+
+    return self.inference_data</code></pre>
+</details>
+<div class="desc"><p>Execute real-time inference pipeline for streaming predictions.</p>
+<p>This method processes the inference data, simulating a real-time streaming environment.
+It handles network delays, potential message loss,
+and includes a retry mechanism for failed events.</p>
+<p>The pipeline performs the following steps:
+1. Loads and prepares the inference data.
+2. Iterates through each event (row) in the data.
+3. Simulates network issues and handles failed events.
+4. Processes each event using the <code>process_single_event</code> method.
+5. Attempts to retry any failed events.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>pandas.DataFrame</code></dt>
+<dd>The processed inference data, potentially including new predictions
+or updates made during the pipeline execution.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<p>Any exceptions not caught during individual event processing or retries will be propagated.</p></div>
+</dd>
+<dt id="Pipedrive.core.inference.RealTimeInference.insert_customer_features"><code class="name flex">
+<span>def <span class="ident">insert_customer_features</span></span>(<span>self, customer_exists, customer_id, purchase_amount, prediction)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def insert_customer_features(
+    self, customer_exists, customer_id, purchase_amount, prediction
+):
+    &#34;&#34;&#34;Update or insert customer features in feature store.
+
+    Either updates existing customer record or creates new one based on customer_exists flag.
+
+    Args:
+        customer_exists (bool): Whether customer has existing feature store record
+        customer_id (str): Customer identifier
+        purchase_amount (float): Current purchase value
+        prediction (float): Predicted loyalty score to store as latest_loyalty_score
+    &#34;&#34;&#34;
+
+    if customer_exists:
+        self.logger.debug(f&#34;Updating the records of the customer: {customer_id}&#34;)
+        self.feature_store_manager.update_customer_features(
+            customer_id,
+            purchase_amount,
+            prediction,  # Use predicted loyalty score as the new latest_loyalty_score
+        )
+    else:
+        self.logger.debug(f&#34;Inserting the records of the customer: {customer_id}&#34;)
+        self.feature_store_manager.add_customer_features(
+            customer_id, purchase_amount, prediction
+        )</code></pre>
+</details>
+<div class="desc"><p>Update or insert customer features in feature store.</p>
+<p>Either updates existing customer record or creates new one based on customer_exists flag.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>customer_exists</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Whether customer has existing feature store record</dd>
+<dt><strong><code>customer_id</code></strong> :&ensp;<code>str</code></dt>
+<dd>Customer identifier</dd>
+<dt><strong><code>purchase_amount</code></strong> :&ensp;<code>float</code></dt>
+<dd>Current purchase value</dd>
+<dt><strong><code>prediction</code></strong> :&ensp;<code>float</code></dt>
+<dd>Predicted loyalty score to store as latest_loyalty_score</dd>
+</dl></div>
+</dd>
+<dt id="Pipedrive.core.inference.RealTimeInference.predict"><code class="name flex">
+<span>def <span class="ident">predict</span></span>(<span>self, features)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def predict(self, features):
+    &#34;&#34;&#34;
+    Generate loyalty score prediction for given features.
+    Args:
+        features (dict): Feature dictionary containing:
+            - latest_purchase_value (float)
+            - avg_purchase_value (float)
+            - avg_loyalty_score (float)
+    Returns:
+        float: Predicted loyalty score
+    &#34;&#34;&#34;
+    # Convert features to DataFrame with named columns
+    feature_df = pd.DataFrame(
+        [
+            [
+                features[&#34;latest_purchase_value&#34;],
+                features[&#34;avg_purchase_value&#34;],
+                features[&#34;avg_loyalty_score&#34;],
+            ]
+        ],
+        columns=[
+            &#34;latest_purchase_value&#34;,
+            &#34;avg_purchase_value&#34;,
+            &#34;avg_loyalty_score&#34;,
+        ],
+    )
+
+    return self.model.predict(feature_df)[0]</code></pre>
+</details>
+<div class="desc"><p>Generate loyalty score prediction for given features.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>features</code></strong> :&ensp;<code>dict</code></dt>
+<dd>Feature dictionary containing:
+- latest_purchase_value (float)
+- avg_purchase_value (float)
+- avg_loyalty_score (float)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>float</code></dt>
+<dd>Predicted loyalty score</dd>
+</dl></div>
+</dd>
+<dt id="Pipedrive.core.inference.RealTimeInference.process_single_event"><code class="name flex">
+<span>def <span class="ident">process_single_event</span></span>(<span>self, row)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def process_single_event(self, row):
+    &#34;&#34;&#34;
+    Process a single event (purchase) for a customer,
+    including feature enrichment and prediction.
+
+    This function simulates network latency,
+    checks if the customer exists in the feature store,
+    enriches the event data, makes a prediction,
+    and updates the feature store with the new data.
+
+    Args:
+        row (pandas.Series): A row from the inference data containing customer
+                             and purchase information.
+                             Expected to have &#39;customer_id&#39;, &#39;purchase_value&#39;,
+                             and &#39;purchase_timestamp&#39; fields.
+    &#34;&#34;&#34;
+    if random.random() &lt; 0.2:  # 20% chance of high latency
+        delay = random.uniform(1, 3)  # High delay
+        self.logger.debug(f&#34;Waiting for High delay: {delay}&#34;)
+        time.sleep(delay)
+
+    else:
+        delay = random.uniform(0.1, 0.5)  # Normal delay
+        self.logger.debug(f&#34;Waiting for Normal delay: {delay}&#34;)
+        time.sleep(delay)
+    customer_exists = self.feature_store_manager.customer_features_exist(
+        str(row[&#34;customer_id&#34;])
+    )
+    event = {
+        &#34;customer_id&#34;: str(row[&#34;customer_id&#34;]),
+        &#34;purchase_value&#34;: row[&#34;purchase_value&#34;],
+        &#34;timestamp&#34;: row[&#34;purchase_timestamp&#34;],
+    }
+
+    features = self.enrich_event(customer_exists, event)
+    prediction = self.predict(features)
+
+    self.insert_customer_features(
+        customer_exists,
+        str(row[&#34;customer_id&#34;]),
+        row[&#34;purchase_value&#34;],
+        prediction,
+    )</code></pre>
+</details>
+<div class="desc"><p>Process a single event (purchase) for a customer,
+including feature enrichment and prediction.</p>
+<p>This function simulates network latency,
+checks if the customer exists in the feature store,
+enriches the event data, makes a prediction,
+and updates the feature store with the new data.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>row</code></strong> :&ensp;<code>pandas.Series</code></dt>
+<dd>A row from the inference data containing customer
+and purchase information.
+Expected to have 'customer_id', 'purchase_value',
+and 'purchase_timestamp' fields.</dd>
+</dl></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="Pipedrive.core" href="index.html">Pipedrive.core</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="Pipedrive.core.inference.RealTimeInference" href="#Pipedrive.core.inference.RealTimeInference">RealTimeInference</a></code></h4>
+<ul class="">
+<li><code><a title="Pipedrive.core.inference.RealTimeInference.enrich_event" href="#Pipedrive.core.inference.RealTimeInference.enrich_event">enrich_event</a></code></li>
+<li><code><a title="Pipedrive.core.inference.RealTimeInference.get_inference_data" href="#Pipedrive.core.inference.RealTimeInference.get_inference_data">get_inference_data</a></code></li>
+<li><code><a title="Pipedrive.core.inference.RealTimeInference.inference_pipeline" href="#Pipedrive.core.inference.RealTimeInference.inference_pipeline">inference_pipeline</a></code></li>
+<li><code><a title="Pipedrive.core.inference.RealTimeInference.insert_customer_features" href="#Pipedrive.core.inference.RealTimeInference.insert_customer_features">insert_customer_features</a></code></li>
+<li><code><a title="Pipedrive.core.inference.RealTimeInference.predict" href="#Pipedrive.core.inference.RealTimeInference.predict">predict</a></code></li>
+<li><code><a title="Pipedrive.core.inference.RealTimeInference.process_single_event" href="#Pipedrive.core.inference.RealTimeInference.process_single_event">process_single_event</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.5</a>.</p>
+</footer>
+</body>
+</html>

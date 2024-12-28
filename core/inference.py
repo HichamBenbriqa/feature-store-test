@@ -12,22 +12,9 @@ The module handles:
 - Managing the complete inference pipeline for batch predictions
 - Integration with Feature Store for persistent storage
 
-Dependencies:
-    - pandas: Data manipulation and analysis
-    - pickle: Model serialization/deserialization
-    - core.constants: Project constants and configurations
-    - core.feature_store_manager: Feature Store management functionality
-
-Example Usage:
-    >>> feature_store_manager = FeatureStoreManager(...)
-    >>> inference_engine = RealTimeInference(
-    ...     feature_store_manager=feature_store_manager,
-    ...     data_path='path/to/inference/data.csv',
-    ...     model_path='path/to/model.pkl'
-    ... )
-    >>> inference_engine.inference_pipeline()
 """
 
+import logging
 import pickle
 import time
 import random
@@ -49,6 +36,7 @@ class RealTimeInference:
         model_path (str): Path to the serialized model file
         inference_data (pandas.DataFrame): Loaded inference data
         model: Loaded prediction model
+        logger (logging.Logger): unified logger object
     """
 
     def __init__(
@@ -56,7 +44,7 @@ class RealTimeInference:
         feature_store_manager: FeatureStoreManager,
         data_path: str = constants.INFERENCE_DATA_PATH,
         model_path: str = constants.MODEL_PATH,
-        logger=None,
+        logger: logging.Logger = None,
     ):
         """
         Initialize the RealTimeInference instance.
@@ -101,7 +89,9 @@ class RealTimeInference:
         """Enrich purchase event with historical features for prediction.
 
         Combines current purchase data with historical features if customer exists in feature store,
-        otherwise uses default values.
+        otherwise uses default values:
+            - avg_purchase_value=current purchase value
+            - avg_loyalty_score=0
 
         Args:
             customer_exists (bool): Whether customer has existing feature store record
@@ -114,21 +104,21 @@ class RealTimeInference:
                 - avg_loyalty_score: Historical average or 0 if new customer
         """
         customer_id = event["customer_id"]
-        purchase_amount = float(event["purchase_value"])
+        purchase_value = float(event["purchase_value"])
 
         if customer_exists:
             customer_features = self.feature_store_manager.get_latest_features(
                 customer_id
             )
             return {
-                "latest_purchase_value": purchase_amount,
+                "latest_purchase_value": purchase_value,
                 "avg_purchase_value": float(customer_features["avg_purchase_value"]),
                 "avg_loyalty_score": float(customer_features["avg_loyalty_score"]),
             }
 
         return {
-            "latest_purchase_value": purchase_amount,
-            "avg_purchase_value": purchase_amount,
+            "latest_purchase_value": purchase_value,
+            "avg_purchase_value": purchase_value,
             "avg_loyalty_score": 0,
         }
 
@@ -176,12 +166,14 @@ class RealTimeInference:
         """
 
         if customer_exists:
+            self.logger.debug(f"Updating the records of the customer: {customer_id}")
             self.feature_store_manager.update_customer_features(
                 customer_id,
                 purchase_amount,
                 prediction,  # Use predicted loyalty score as the new latest_loyalty_score
             )
         else:
+            self.logger.debug(f"Inserting the records of the customer: {customer_id}")
             self.feature_store_manager.add_customer_features(
                 customer_id, purchase_amount, prediction
             )

@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.5">
+<title>Pipedrive.tests API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>Pipedrive.tests</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="Pipedrive.tests.fetch_offline_store_data"><code class="name flex">
+<span>def <span class="ident">fetch_offline_store_data</span></span>(<span>feature_group)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def fetch_offline_store_data(feature_group):
+    &#34;&#34;&#34;
+    Fetch all data from the offline feature store.
+
+    Args:
+        feature_group: SageMaker Feature Group object
+
+    Returns:
+        pd.DataFrame: Data from offline store
+    &#34;&#34;&#34;
+    query = feature_group.athena_query()
+    customer_table = query.table_name
+    query.run(
+        query_string=f&#34;SELECT * FROM {customer_table}&#34;,
+        output_location=f&#34;s3://{feature_group.sagemaker_session.default_bucket()}/feature-store/test_queries&#34;,
+    )
+    query.wait()
+    return query.as_dataframe()</code></pre>
+</details>
+<div class="desc"><p>Fetch all data from the offline feature store.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>feature_group</code></strong></dt>
+<dd>SageMaker Feature Group object</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>pd.DataFrame</code></dt>
+<dd>Data from offline store</dd>
+</dl></div>
+</dd>
+<dt id="Pipedrive.tests.fetch_online_store_record"><code class="name flex">
+<span>def <span class="ident">fetch_online_store_record</span></span>(<span>featurestore_runtime, customer_id)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def fetch_online_store_record(featurestore_runtime, customer_id):
+    &#34;&#34;&#34;
+    Fetch a customer&#39;s record from the online feature store.
+
+    Args:
+        featurestore_runtime: SageMaker Feature Store runtime client
+        customer_id: Customer ID to fetch
+
+    Returns:
+        dict: Customer&#39;s features from online store
+    &#34;&#34;&#34;
+    response = featurestore_runtime.get_record(
+        FeatureGroupName=constants.FEATURE_GROUP_NAME,
+        RecordIdentifierValueAsString=str(customer_id),
+    )
+    record = response[&#34;Record&#34;]
+
+    return {
+        &#34;customer_id&#34;: utils.get_feature_value(record, &#34;customer_id&#34;),
+        &#34;purchase_timestamp&#34;: utils.get_feature_value(record, &#34;purchase_timestamp&#34;),
+        &#34;latest_purchase_value&#34;: float(
+            utils.get_feature_value(record, &#34;latest_purchase_value&#34;)
+        ),
+    }</code></pre>
+</details>
+<div class="desc"><p>Fetch a customer's record from the online feature store.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>featurestore_runtime</code></strong></dt>
+<dd>SageMaker Feature Store runtime client</dd>
+<dt><strong><code>customer_id</code></strong></dt>
+<dd>Customer ID to fetch</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>Customer's features from online store</dd>
+</dl></div>
+</dd>
+<dt id="Pipedrive.tests.get_latest_csv_record"><code class="name flex">
+<span>def <span class="ident">get_latest_csv_record</span></span>(<span>df, customer_id)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_latest_csv_record(df, customer_id):
+    &#34;&#34;&#34;
+    Get the latest record for a customer from CSV data.
+
+    Args:
+        df (pd.DataFrame): DataFrame containing customer records
+        customer_id: Customer ID to look up
+
+    Returns:
+        pd.Series: Latest record for the customer
+    &#34;&#34;&#34;
+    customer_df = df[df[&#34;customer_id&#34;] == customer_id]
+    return customer_df.sort_values(&#34;purchase_timestamp&#34;, ascending=False).iloc[0]</code></pre>
+</details>
+<div class="desc"><p>Get the latest record for a customer from CSV data.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>DataFrame containing customer records</dd>
+<dt><strong><code>customer_id</code></strong></dt>
+<dd>Customer ID to look up</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>pd.Series</code></dt>
+<dd>Latest record for the customer</dd>
+</dl></div>
+</dd>
+<dt id="Pipedrive.tests.get_test_customers"><code class="name flex">
+<span>def <span class="ident">get_test_customers</span></span>(<span>csv_path, min_records=2, num_customers=10)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_test_customers(csv_path, min_records=2, num_customers=10):
+    &#34;&#34;&#34;
+    Get random customers from CSV that have multiple records.
+
+    Args:
+        csv_path (str): Path to CSV file
+        min_records (int): Minimum number of records a customer should have
+        num_customers (int): Number of customers to select
+
+    Returns:
+        list: Selected customer IDs
+    &#34;&#34;&#34;
+    df = pd.read_csv(csv_path)
+    customer_counts = df[&#34;customer_id&#34;].value_counts()
+    eligible_customers = customer_counts[customer_counts &gt;= min_records].index.tolist()
+
+    if len(eligible_customers) &lt; num_customers:
+        raise ValueError(f&#34;Not enough customers with {min_records} or more records&#34;)
+
+    return np.random.choice(eligible_customers, num_customers, replace=False).tolist()</code></pre>
+</details>
+<div class="desc"><p>Get random customers from CSV that have multiple records.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>csv_path</code></strong> :&ensp;<code>str</code></dt>
+<dd>Path to CSV file</dd>
+<dt><strong><code>min_records</code></strong> :&ensp;<code>int</code></dt>
+<dd>Minimum number of records a customer should have</dd>
+<dt><strong><code>num_customers</code></strong> :&ensp;<code>int</code></dt>
+<dd>Number of customers to select</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>Selected customer IDs</dd>
+</dl></div>
+</dd>
+<dt id="Pipedrive.tests.setup_aws_session"><code class="name flex">
+<span>def <span class="ident">setup_aws_session</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setup_aws_session():
+    &#34;&#34;&#34;
+    Set up AWS and SageMaker session objects.
+
+    Returns:
+        tuple: (feature_group, featurestore_runtime) - Configured Feature Group and runtime client
+    &#34;&#34;&#34;
+    boto_session = boto3.Session()
+    sagemaker_client = boto_session.client(service_name=&#34;sagemaker&#34;)
+    featurestore_runtime = boto_session.client(
+        service_name=&#34;sagemaker-featurestore-runtime&#34;
+    )
+    feature_store_session = Session(
+        boto_session=boto_session,
+        sagemaker_client=sagemaker_client,
+        sagemaker_featurestore_runtime_client=featurestore_runtime,
+    )
+
+    feature_group = FeatureGroup(
+        name=constants.FEATURE_GROUP_NAME, sagemaker_session=feature_store_session
+    )
+
+    return feature_group, featurestore_runtime</code></pre>
+</details>
+<div class="desc"><p>Set up AWS and SageMaker session objects.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple</code></dt>
+<dd>(feature_group, featurestore_runtime) - Configured Feature Group and runtime client</dd>
+</dl></div>
+</dd>
+<dt id="Pipedrive.tests.test_feature_engineering"><code class="name flex">
+<span>def <span class="ident">test_feature_engineering</span></span>(<span>historical_df, engineered_df)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_feature_engineering(historical_df, engineered_df):
+    &#34;&#34;&#34;
+    Test the feature engineering process by comparing the input historical dataframe
+    with the output engineered dataframe.
+
+    This function performs two tests:
+    1. Checks if the engineered dataframe has the correct columns.
+    2. Verifies if the number of unique customers in the engineered dataframe
+       matches the number in the historical dataframe.
+
+    Args:
+        historical_df (pd.DataFrame): The original historical dataframe before feature engineering.
+        engineered_df (pd.DataFrame): The resulting dataframe after feature engineering.
+
+    Raises:
+        AssertionError: If the engineered dataframe doesn&#39;t have the expected columns
+                        or if the number of unique customers doesn&#39;t match.
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    expected_columns = {
+        &#34;customer_id&#34;,
+        &#34;purchase_timestamp&#34;,
+        &#34;latest_purchase_value&#34;,
+        &#34;avg_purchase_value&#34;,
+        &#34;latest_loyalty_score&#34;,
+        &#34;avg_loyalty_score&#34;,
+    }
+    assert (
+        set(engineered_df.columns) == expected_columns
+    ), f&#34;Missing or extra columns. Expected {expected_columns}, got {set(engineered_df.columns)}&#34;
+
+    assert (
+        len(engineered_df) == len(historical_df[&#34;customer_id&#34;].unique())
+    ), f&#34;Expected {len(historical_df[&#39;customer_id&#39;].unique())} customers, got {len(engineered_df)}&#34;</code></pre>
+</details>
+<div class="desc"><p>Test the feature engineering process by comparing the input historical dataframe
+with the output engineered dataframe.</p>
+<p>This function performs two tests:
+1. Checks if the engineered dataframe has the correct columns.
+2. Verifies if the number of unique customers in the engineered dataframe
+matches the number in the historical dataframe.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>historical_df</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>The original historical dataframe before feature engineering.</dd>
+<dt><strong><code>engineered_df</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>The resulting dataframe after feature engineering.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>AssertionError</code></dt>
+<dd>If the engineered dataframe doesn't have the expected columns
+or if the number of unique customers doesn't match.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+</dd>
+<dt id="Pipedrive.tests.test_insertion"><code class="name flex">
+<span>def <span class="ident">test_insertion</span></span>(<span>feature_store_runtime, customer_id=100)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_insertion(feature_store_runtime, customer_id=100):
+    &#34;&#34;&#34;
+    Test the insertion of a customer record into the feature store.
+
+    This function attempts to retrieve a record for a given customer ID from the
+    feature store. It then asserts that the response contains a &#39;Record&#39; key,
+    indicating successful retrieval and, by extension, successful insertion.
+
+    Args:
+        feature_store_runtime (boto3.client): A boto3 client for the SageMaker Feature Store runtime.
+        customer_id (int, optional): The ID of the customer to test. Defaults to 100.
+
+    Returns:
+        None
+
+    Raises:
+        AssertionError: If the response does not contain a &#39;Record&#39; key.
+    &#34;&#34;&#34;
+    record_identifier_value = str(customer_id)
+    print(f&#34;Testing with {record_identifier_value}&#34;)
+    response = feature_store_runtime.get_record(
+        FeatureGroupName=&#34;customer_purchase_features&#34;,
+        RecordIdentifierValueAsString=record_identifier_value,
+    )
+    assert &#34;Record&#34; in response</code></pre>
+</details>
+<div class="desc"><p>Test the insertion of a customer record into the feature store.</p>
+<p>This function attempts to retrieve a record for a given customer ID from the
+feature store. It then asserts that the response contains a 'Record' key,
+indicating successful retrieval and, by extension, successful insertion.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>feature_store_runtime</code></strong> :&ensp;<code>boto3.client</code></dt>
+<dd>A boto3 client for the SageMaker Feature Store runtime.</dd>
+<dt><strong><code>customer_id</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>The ID of the customer to test. Defaults to 100.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>AssertionError</code></dt>
+<dd>If the response does not contain a 'Record' key.</dd>
+</dl></div>
+</dd>
+<dt id="Pipedrive.tests.test_offline_store"><code class="name flex">
+<span>def <span class="ident">test_offline_store</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_offline_store():
+    &#34;&#34;&#34;
+    Test data consistency in the offline feature store.
+    Verifies that selected customers have at least 2 records.
+    &#34;&#34;&#34;
+    csv_path = &#34;data/inference_data.csv&#34;
+    feature_group, _ = setup_aws_session()
+
+    # Get test customers and offline data
+    test_customers = get_test_customers(csv_path)
+    print(f&#34;Testing offline store for customers: {test_customers}&#34;)
+
+    offline_df = fetch_offline_store_data(feature_group)
+
+    # Check each customer&#39;s records
+    for customer_id in test_customers:
+        customer_records = offline_df[offline_df[&#34;customer_id&#34;] == customer_id]
+        assert (
+            len(customer_records) &gt;= 2
+        ), f&#34;Customer {customer_id} has fewer than 2 records&#34;
+
+    print(&#34;✅ All customers have required number of records in offline store&#34;)</code></pre>
+</details>
+<div class="desc"><p>Test data consistency in the offline feature store.
+Verifies that selected customers have at least 2 records.</p></div>
+</dd>
+<dt id="Pipedrive.tests.test_online_store"><code class="name flex">
+<span>def <span class="ident">test_online_store</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_online_store():
+    &#34;&#34;&#34;
+    Test data consistency between online feature store and CSV data.
+    Compares purchase values and timestamps for selected customers.
+    &#34;&#34;&#34;
+    csv_path = &#34;data/inference_data.csv&#34;
+    _, featurestore_runtime = setup_aws_session()
+
+    # Get test customers and CSV data
+    test_customers = get_test_customers(csv_path)
+    print(f&#34;Testing online store for customers: {test_customers}&#34;)
+
+    df = pd.read_csv(csv_path)
+
+    # Compare records for each customer
+    for customer_id in test_customers:
+        csv_record = get_latest_csv_record(df, customer_id)
+        online_record = fetch_online_store_record(featurestore_runtime, customer_id)
+
+        csv_purchase = float(csv_record[&#34;purchase_value&#34;])
+        online_purchase = online_record[&#34;latest_purchase_value&#34;]
+
+        print(f&#34;\nCustomer: {customer_id}&#34;)
+        print(f&#34;CSV Purchase Value: {csv_purchase}&#34;)
+        print(f&#34;Online Purchase Value: {online_purchase}&#34;)
+        print(f&#34;CSV Timestamp: {csv_record[&#39;purchase_timestamp&#39;]}&#34;)
+        print(f&#34;Online Timestamp: {online_record[&#39;purchase_timestamp&#39;]}&#34;)
+
+        if abs(csv_purchase - online_purchase) &gt; 0.0001:
+            print(&#34;❌ Values don&#39;t match!&#34;)
+        else:
+            print(&#34;✅ Values match!&#34;)</code></pre>
+</details>
+<div class="desc"><p>Test data consistency between online feature store and CSV data.
+Compares purchase values and timestamps for selected customers.</p></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="Pipedrive" href="index.html">Pipedrive</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="Pipedrive.tests.fetch_offline_store_data" href="#Pipedrive.tests.fetch_offline_store_data">fetch_offline_store_data</a></code></li>
+<li><code><a title="Pipedrive.tests.fetch_online_store_record" href="#Pipedrive.tests.fetch_online_store_record">fetch_online_store_record</a></code></li>
+<li><code><a title="Pipedrive.tests.get_latest_csv_record" href="#Pipedrive.tests.get_latest_csv_record">get_latest_csv_record</a></code></li>
+<li><code><a title="Pipedrive.tests.get_test_customers" href="#Pipedrive.tests.get_test_customers">get_test_customers</a></code></li>
+<li><code><a title="Pipedrive.tests.setup_aws_session" href="#Pipedrive.tests.setup_aws_session">setup_aws_session</a></code></li>
+<li><code><a title="Pipedrive.tests.test_feature_engineering" href="#Pipedrive.tests.test_feature_engineering">test_feature_engineering</a></code></li>
+<li><code><a title="Pipedrive.tests.test_insertion" href="#Pipedrive.tests.test_insertion">test_insertion</a></code></li>
+<li><code><a title="Pipedrive.tests.test_offline_store" href="#Pipedrive.tests.test_offline_store">test_offline_store</a></code></li>
+<li><code><a title="Pipedrive.tests.test_online_store" href="#Pipedrive.tests.test_online_store">test_online_store</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.5</a>.</p>
+</footer>
+</body>
+</html>

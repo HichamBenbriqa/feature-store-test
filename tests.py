@@ -235,9 +235,3 @@ def test_online_store():
             print("❌ Values don't match!")
         else:
             print("✅ Values match!")
-
-
-test_offline_store()
-
-
-test_online_store()

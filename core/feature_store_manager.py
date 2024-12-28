@@ -1,9 +1,11 @@
 """
 SageMaker Feature Store Management Module
 
-This module provides a comprehensive interface for managing customer features in Amazon SageMaker Feature Store.
-It handles both online and offline feature storage, feature ingestion, and retrieval operations for customer
-purchase and loyalty data.
+This module provides a comprehensive interface for managing customer features
+in Amazon SageMaker Feature Store.
+
+It handles both online and offline feature storage, feature ingestion,
+and retrieval operations for customer purchase and loyalty data.
 
 The module implements a FeatureStoreManager class that abstracts the complexity of:
 - Creating and managing feature groups
@@ -12,29 +14,12 @@ The module implements a FeatureStoreManager class that abstracts the complexity 
 - Managing customer-specific feature operations
 - Handling both batch and real-time feature updates
 
-Dependencies:
-    - boto3: AWS SDK for Python
-    - sagemaker: Amazon SageMaker Python SDK
-    - pandas: Data manipulation library
-    - datetime: Standard Python datetime utilities
-
-Example Usage:
-    >>> session = Session()
-    >>> feature_store_runtime = boto3.client('sagemaker-featurestore-runtime')
-    >>> manager = FeatureStoreManager(
-    ...     feature_store_session=session,
-    ...     s3_bucket_name='my-feature-store-bucket',
-    ...     feature_store_runtime=feature_store_runtime,
-    ...     aws_role='arn:aws:iam::account:role/service-role'
-    ... )
-    >>> manager.create_feature_group()
-    >>> manager.add_customer_features('customer123', 100.0, 0.85)
-
 Note:
     This module requires appropriate AWS credentials and permissions to interact with
     SageMaker Feature Store and S3 services.
 """
 
+import logging
 from datetime import datetime
 from sagemaker.session import Session
 from sagemaker.feature_store.feature_group import FeatureGroup
@@ -68,7 +53,7 @@ class FeatureStoreManager:
         s3_bucket_name: str,
         feature_store_runtime,
         aws_role: str,
-        logger,
+        logger: logging.Logger,
     ):
         """
         Initialize the FeatureStoreManager with necessary AWS resources.
@@ -78,6 +63,7 @@ class FeatureStoreManager:
             s3_bucket_name (str): Name of the S3 bucket for storing offline features
             feature_store_runtime: Runtime client for Feature Store operations
             aws_role (str): AWS IAM role ARN with necessary permissions
+            logger (logging.Logger): unified logger object
         """
         self.feature_store_session = feature_store_session
         self.s3_bucket_name = s3_bucket_name
@@ -180,11 +166,11 @@ class FeatureStoreManager:
             bool: True if customer features exist, False otherwise
         """
         response = self.feature_store_runtime.get_record(
-            FeatureGroupName="customer_purchase_features",
+            FeatureGroupName=constants.FEATURE_GROUP_NAME,
             RecordIdentifierValueAsString=customer_id,
         )
         if "Record" not in response:
-            self.logger.warning(f"No records found for customer {customer_id}")
+            self.logger.warning(f"{customer_id} has no records in the feature store")
             return False
         return True
 
