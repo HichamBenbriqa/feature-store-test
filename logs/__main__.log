@@ -1,0 +1,131 @@
+2024-12-28 16:26:38 - __main__ - INFO - Waiting for Feature Group Creation
+2024-12-28 16:26:43 - __main__ - INFO - Waiting for Feature Group Creation
+2024-12-28 16:26:49 - __main__ - INFO - Waiting for Feature Group Creation
+2024-12-28 16:26:54 - __main__ - INFO - Waiting for Feature Group Creation
+2024-12-28 16:26:59 - __main__ - INFO - FeatureGroup customer_purchase_features successfully created.
+2024-12-28 16:27:20 - __main__ - INFO - Waiting for data in offline store...
+
+2024-12-28 16:28:21 - __main__ - INFO - Waiting for data in offline store...
+
+2024-12-28 16:29:22 - __main__ - INFO - Waiting for data in offline store...
+
+2024-12-28 16:30:23 - __main__ - INFO - Waiting for data in offline store...
+
+2024-12-28 16:31:23 - __main__ - INFO - Waiting for data in offline store...
+
+2024-12-28 16:32:24 - __main__ - INFO - Waiting for data in offline store...
+
+2024-12-28 16:33:25 - __main__ - INFO - Data available.
+2024-12-28 16:33:35 - __main__ - INFO - Total Events: (92, 4)
+2024-12-28 16:33:35 - __main__ - INFO - Received event: 50 
+2024-12-28 16:33:37 - __main__ - INFO - Received event: 98 
+2024-12-28 16:33:38 - __main__ - INFO - Received event: 44 
+2024-12-28 16:33:41 - __main__ - WARNING - No records found for customer 44
+2024-12-28 16:33:41 - __main__ - INFO - Received event: 81 
+2024-12-28 16:33:41 - __main__ - WARNING - Network issue for customer 81 - Adding to retry queue
+2024-12-28 16:33:41 - __main__ - INFO - Received event: 47 
+2024-12-28 16:33:42 - __main__ - INFO - Received event: 100 
+2024-12-28 16:33:43 - __main__ - INFO - Received event: 7 
+2024-12-28 16:33:46 - __main__ - INFO - Received event: 41 
+2024-12-28 16:33:48 - __main__ - INFO - Received event: 24 
+2024-12-28 16:33:49 - __main__ - INFO - Received event: 69 
+2024-12-28 16:33:50 - __main__ - INFO - Received event: 12 
+2024-12-28 16:33:51 - __main__ - INFO - Received event: 35 
+2024-12-28 16:33:52 - __main__ - INFO - Received event: 69 
+2024-12-28 16:33:53 - __main__ - INFO - Received event: 6 
+2024-12-28 16:33:54 - __main__ - INFO - Received event: 1 
+2024-12-28 16:33:55 - __main__ - INFO - Received event: 95 
+2024-12-28 16:33:56 - __main__ - INFO - Received event: 12 
+2024-12-28 16:33:58 - __main__ - INFO - Received event: 63 
+2024-12-28 16:33:59 - __main__ - INFO - Received event: 18 
+2024-12-28 16:34:00 - __main__ - INFO - Received event: 69 
+2024-12-28 16:34:01 - __main__ - INFO - Received event: 56 
+2024-12-28 16:34:02 - __main__ - INFO - Received event: 65 
+2024-12-28 16:34:03 - __main__ - INFO - Received event: 42 
+2024-12-28 16:34:05 - __main__ - INFO - Received event: 63 
+2024-12-28 16:34:07 - __main__ - INFO - Received event: 42 
+2024-12-28 16:34:08 - __main__ - INFO - Received event: 39 
+2024-12-28 16:34:10 - __main__ - WARNING - No records found for customer 39
+2024-12-28 16:34:10 - __main__ - INFO - Received event: 4 
+2024-12-28 16:34:11 - __main__ - INFO - Received event: 16 
+2024-12-28 16:34:13 - __main__ - INFO - Received event: 39 
+2024-12-28 16:34:14 - __main__ - INFO - Received event: 65 
+2024-12-28 16:34:15 - __main__ - INFO - Received event: 75 
+2024-12-28 16:34:15 - __main__ - WARNING - Network issue for customer 75 - Adding to retry queue
+2024-12-28 16:34:15 - __main__ - INFO - Received event: 46 
+2024-12-28 16:34:16 - __main__ - WARNING - No records found for customer 46
+2024-12-28 16:34:16 - __main__ - INFO - Received event: 86 
+2024-12-28 16:34:17 - __main__ - INFO - Received event: 90 
+2024-12-28 16:34:18 - __main__ - INFO - Received event: 13 
+2024-12-28 16:34:21 - __main__ - INFO - Received event: 44 
+2024-12-28 16:34:22 - __main__ - INFO - Received event: 8 
+2024-12-28 16:34:22 - __main__ - WARNING - No records found for customer 8
+2024-12-28 16:34:23 - __main__ - INFO - Received event: 75 
+2024-12-28 16:34:24 - __main__ - INFO - Received event: 88 
+2024-12-28 16:34:25 - __main__ - INFO - Received event: 73 
+2024-12-28 16:34:26 - __main__ - INFO - Received event: 75 
+2024-12-28 16:34:27 - __main__ - INFO - Received event: 81 
+2024-12-28 16:34:28 - __main__ - INFO - Received event: 16 
+2024-12-28 16:34:29 - __main__ - INFO - Received event: 20 
+2024-12-28 16:34:31 - __main__ - INFO - Received event: 28 
+2024-12-28 16:34:33 - __main__ - INFO - Received event: 43 
+2024-12-28 16:34:34 - __main__ - INFO - Received event: 31 
+2024-12-28 16:34:35 - __main__ - INFO - Received event: 9 
+2024-12-28 16:34:36 - __main__ - INFO - Received event: 20 
+2024-12-28 16:34:37 - __main__ - INFO - Received event: 44 
+2024-12-28 16:34:38 - __main__ - INFO - Received event: 15 
+2024-12-28 16:34:40 - __main__ - INFO - Received event: 96 
+2024-12-28 16:34:42 - __main__ - INFO - Received event: 56 
+2024-12-28 16:34:44 - __main__ - INFO - Received event: 45 
+2024-12-28 16:34:45 - __main__ - INFO - Received event: 60 
+2024-12-28 16:34:48 - __main__ - INFO - Received event: 86 
+2024-12-28 16:34:49 - __main__ - INFO - Received event: 80 
+2024-12-28 16:34:50 - __main__ - WARNING - No records found for customer 80
+2024-12-28 16:34:50 - __main__ - INFO - Received event: 17 
+2024-12-28 16:34:51 - __main__ - INFO - Received event: 2 
+2024-12-28 16:34:52 - __main__ - WARNING - No records found for customer 2
+2024-12-28 16:34:52 - __main__ - INFO - Received event: 87 
+2024-12-28 16:34:53 - __main__ - INFO - Received event: 13 
+2024-12-28 16:34:54 - __main__ - INFO - Received event: 93 
+2024-12-28 16:34:56 - __main__ - INFO - Received event: 82 
+2024-12-28 16:34:57 - __main__ - INFO - Received event: 79 
+2024-12-28 16:34:59 - __main__ - INFO - Received event: 49 
+2024-12-28 16:34:59 - __main__ - WARNING - No records found for customer 49
+2024-12-28 16:34:59 - __main__ - INFO - Received event: 25 
+2024-12-28 16:35:02 - __main__ - INFO - Received event: 62 
+2024-12-28 16:35:02 - __main__ - WARNING - Network issue for customer 62 - Adding to retry queue
+2024-12-28 16:35:02 - __main__ - INFO - Received event: 68 
+2024-12-28 16:35:02 - __main__ - WARNING - Network issue for customer 68 - Adding to retry queue
+2024-12-28 16:35:02 - __main__ - INFO - Received event: 47 
+2024-12-28 16:35:03 - __main__ - INFO - Received event: 9 
+2024-12-28 16:35:04 - __main__ - INFO - Received event: 41 
+2024-12-28 16:35:05 - __main__ - INFO - Received event: 58 
+2024-12-28 16:35:06 - __main__ - INFO - Received event: 5 
+2024-12-28 16:35:07 - __main__ - INFO - Received event: 92 
+2024-12-28 16:35:07 - __main__ - WARNING - Network issue for customer 92 - Adding to retry queue
+2024-12-28 16:35:07 - __main__ - INFO - Received event: 35 
+2024-12-28 16:35:09 - __main__ - INFO - Received event: 32 
+2024-12-28 16:35:10 - __main__ - INFO - Received event: 29 
+2024-12-28 16:35:11 - __main__ - INFO - Received event: 93 
+2024-12-28 16:35:12 - __main__ - INFO - Received event: 22 
+2024-12-28 16:35:16 - __main__ - INFO - Received event: 10 
+2024-12-28 16:35:16 - __main__ - INFO - Received event: 15 
+2024-12-28 16:35:20 - __main__ - INFO - Received event: 88 
+2024-12-28 16:35:21 - __main__ - INFO - Received event: 38 
+2024-12-28 16:35:21 - __main__ - WARNING - No records found for customer 38
+2024-12-28 16:35:22 - __main__ - INFO - Received event: 55 
+2024-12-28 16:35:23 - __main__ - INFO - Received event: 71 
+2024-12-28 16:35:23 - __main__ - INFO - Received event: 60 
+2024-12-28 16:35:25 - __main__ - INFO - Received event: 28 
+2024-12-28 16:35:26 - __main__ - INFO - Received event: 74 
+2024-12-28 16:35:27 - __main__ - INFO - Received event: 71 
+2024-12-28 16:35:28 - __main__ - INFO - Received event: 37 
+2024-12-28 16:35:30 - __main__ - WARNING - No records found for customer 37
+2024-12-28 16:35:31 - __main__ - INFO - Received event: 14 
+2024-12-28 16:35:32 - __main__ - INFO - Received event: 14 
+2024-12-28 16:35:33 - __main__ - INFO - Retrying 5 failed events...
+2024-12-28 16:35:33 - __main__ - INFO - Re-handling event: 81 
+2024-12-28 16:35:36 - __main__ - INFO - Re-handling event: 75 
+2024-12-28 16:35:38 - __main__ - INFO - Re-handling event: 62 
+2024-12-28 16:35:39 - __main__ - INFO - Re-handling event: 68 
+2024-12-28 16:35:41 - __main__ - INFO - Re-handling event: 92 
