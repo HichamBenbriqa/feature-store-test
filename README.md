@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project demonstrates the implementation of a Feature store using AWS SageMaker for managing and serving features to machine learning models. The solution focuses on predicting customer loyalty scores based on their purchase history and leverages AWS SageMaker Feature store for efficient feature management and retrieval.
+This project demonstrates the implementation of a feature store using AWS SageMaker for managing and serving features to machine learning models. The solution focuses on predicting customer loyalty scores based on their purchase history and leverages AWS SageMaker Feature store for efficient feature management and retrieval.
 
 
 ## Assumptions and design decisions
@@ -28,14 +28,14 @@ This project demonstrates the implementation of a Feature store using AWS SageMa
         - Average past purchase values
         - Average historical loyalty scores
 
-### Design Decisions
+### Design decisions
 
-1. **Data Splitting**
+1. **Data splitting**
     - Following assumption #1, the data is split 70/30
     - 70% represents historical data
     - 30% simulates real-time purchase events
 
-2. **Feature Engineering**
+2. **Feature engineering**
   - Data is grouped by customer ID to compute:
     - Purchase average
     - Average loyalty score
@@ -45,7 +45,7 @@ This project demonstrates the implementation of a Feature store using AWS SageMa
     - average_loyalty_score
   - Objective: predict latest_loyalty_score
 
-3. **Feature Storage and Serving**
+3. **Feature storage and serving**
   - AWS SageMaker Feature Store is selected for its:
     - Scaling capabilities
     - Integration with other AWS services (e.g., Kinesis)
@@ -86,9 +86,14 @@ This project demonstrates the implementation of a Feature store using AWS SageMa
 5. `core/constants.py`: Stores constant values used across the project
 6. `tests.py`: Includes test functions used during developpement.
 
-## Setup and Installation
+## Setup and usage
 
 1. Clone the repository
+
+```bash
+git clone git@github.com:HichamBenbriqa/feature-store-test.git
+```
+
 2. Create folder `/data` and copy the csv files: `historical_data.csv` and `inference_data.csv` to it.
 3. Install required dependencies: `poetry install`
 4. Set environment variables:
