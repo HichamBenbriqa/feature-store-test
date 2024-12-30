@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "pipedrive-test"
+version = "0.1.0"
+description = ""
+authors = ["HichamBenbriqa <hichambenbriqa@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pandas = "^2.2.3"
+scikit-learn = "^1.6.0"
+boto3 = "^1.35.86"
+sagemaker = "^2.237.1"
+python-dotenv = "^1.0.1"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+pdoc3 = "^0.11.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

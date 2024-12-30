@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.5">
+<title>Pipedrive.core.utils API documentation</title>
+<meta name="description" content="AWS SageMaker Feature Store Utility Functions …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>Pipedrive.core.utils</code></h1>
+</header>
+<section id="section-intro">
+<p>AWS SageMaker Feature Store Utility Functions</p>
+<p>This module provides utility functions for working with AWS SageMaker Feature Store,
+S3, and machine learning model operations. It includes functionality for monitoring
+Feature Store operations, managing data in S3, feature engineering, and model training.</p>
+<p>The module provides utilities for:
+- Logging
+- Feature group creation monitoring
+- Offline store data availability checking
+- Feature value extraction
+- Feature engineering from historical data
+- Model training and persistence</p>
+<h2 id="note">Note</h2>
+<p>These utilities are designed to work with AWS services and require appropriate
+AWS credentials and permissions to function correctly.</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="Pipedrive.core.utils.engineer_features"><code class="name flex">
+<span>def <span class="ident">engineer_features</span></span>(<span>historical_df)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def engineer_features(historical_df):
+    &#34;&#34;&#34;
+    Calculate and engineer features from historical customer data.
+
+    Args:
+        historical_df (pandas.DataFrame): DataFrame containing historical customer data
+            with columns:
+            - customer_id
+            - purchase_timestamp
+            - purchase_value
+            - loyalty_score
+
+    Returns:
+        pandas.DataFrame: Engineered features including:
+            - customer_id
+            - purchase_timestamp (formatted)
+            - latest_purchase_value
+            - avg_purchase_value
+            - avg_loyalty_score
+            - latest_loyalty_score
+
+    Note:
+        This function performs several transformations:
+        1. Converts timestamps to datetime format
+        2. Groups data by customer_id
+        3. Calculates latest and average values for purchases and loyalty scores
+        4. Formats timestamps for Feature Store compatibility
+    &#34;&#34;&#34;
+    historical_df[&#34;purchase_timestamp&#34;] = pd.to_datetime(
+        historical_df[&#34;purchase_timestamp&#34;]
+    )
+
+    customer_features = (
+        historical_df.groupby(&#34;customer_id&#34;)
+        .agg(
+            {
+                &#34;purchase_timestamp&#34;: &#34;max&#34;,
+                &#34;purchase_value&#34;: [
+                    &#34;last&#34;,
+                    &#34;mean&#34;,
+                ],
+                &#34;loyalty_score&#34;: [
+                    &#34;last&#34;,
+                    &#34;mean&#34;,
+                ],
+            }
+        )
+        .reset_index()
+    )
+
+    customer_features.columns = [
+        &#34;customer_id&#34;,
+        &#34;purchase_timestamp&#34;,
+        &#34;latest_purchase_value&#34;,
+        &#34;avg_purchase_value&#34;,
+        &#34;avg_loyalty_score&#34;,
+        &#34;latest_loyalty_score&#34;,
+    ]
+
+    customer_features[&#34;purchase_timestamp&#34;] = customer_features[
+        &#34;purchase_timestamp&#34;
+    ].dt.strftime(&#34;%Y-%m-%dT%H:%M:%S.%fZ&#34;)
+
+    return customer_features</code></pre>
+</details>
+<div class="desc"><p>Calculate and engineer features from historical customer data.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>historical_df</code></strong> :&ensp;<code>pandas.DataFrame</code></dt>
+<dd>DataFrame containing historical customer data
+with columns:
+- customer_id
+- purchase_timestamp
+- purchase_value
+- loyalty_score</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>pandas.DataFrame</code></dt>
+<dd>Engineered features including:
+- customer_id
+- purchase_timestamp (formatted)
+- latest_purchase_value
+- avg_purchase_value
+- avg_loyalty_score
+- latest_loyalty_score</dd>
+</dl>
+<h2 id="note">Note</h2>
+<p>This function performs several transformations:
+1. Converts timestamps to datetime format
+2. Groups data by customer_id
+3. Calculates latest and average values for purchases and loyalty scores
+4. Formats timestamps for Feature Store compatibility</p></div>
+</dd>
+<dt id="Pipedrive.core.utils.get_feature_value"><code class="name flex">
+<span>def <span class="ident">get_feature_value</span></span>(<span>record, feature_name)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_feature_value(record, feature_name):
+    &#34;&#34;&#34;
+    Extract a specific feature value from a Feature Store record.
+
+    Args:
+        record (list): List of feature records from Feature Store
+        feature_name (str): Name of the feature to extract
+
+    Returns:
+        str: Value of the requested feature
+
+    Note:
+        The function assumes the feature exists in the record. If the feature
+        doesn&#39;t exist, it will raise an IndexError.
+    &#34;&#34;&#34;
+    return str(
+        list(filter(lambda r: r[&#34;FeatureName&#34;] == feature_name, record))[0][
+            &#34;ValueAsString&#34;
+        ]
+    )</code></pre>
+</details>
+<div class="desc"><p>Extract a specific feature value from a Feature Store record.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>record</code></strong> :&ensp;<code>list</code></dt>
+<dd>List of feature records from Feature Store</dd>
+<dt><strong><code>feature_name</code></strong> :&ensp;<code>str</code></dt>
+<dd>Name of the feature to extract</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>Value of the requested feature</dd>
+</dl>
+<h2 id="note">Note</h2>
+<p>The function assumes the feature exists in the record. If the feature
+doesn't exist, it will raise an IndexError.</p></div>
+</dd>
+<dt id="Pipedrive.core.utils.setup_logger"><code class="name flex">
+<span>def <span class="ident">setup_logger</span></span>(<span>name: str, log_level=10) ‑> logging.Logger</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setup_logger(name: str, log_level=logging.DEBUG) -&gt; logging.Logger:
+    &#34;&#34;&#34;
+    Create a logger with both file and console handlers.
+    Args:
+        name (str): Name of the logger, typically __name__ from the calling module
+        log_level: Logging level, defaults to DEBUG
+    Returns:
+        logging.Logger: Configured logger instance
+    &#34;&#34;&#34;
+    logs_dir = &#34;logs&#34;
+    if not os.path.exists(logs_dir):
+        os.makedirs(logs_dir)
+
+    logger = logging.getLogger(name)
+
+    logger.handlers.clear()
+
+    logger.setLevel(log_level)
+
+    formatter = logging.Formatter(
+        &#34;%(asctime)s - %(name)s - %(levelname)s - %(message)s&#34;,
+        datefmt=&#34;%Y-%m-%d %H:%M:%S&#34;,
+    )
+
+    file_handler = RotatingFileHandler(
+        filename=f&#34;{logs_dir}/{name}.log&#34;,
+        maxBytes=10 * 1024 * 1024,
+        backupCount=5,
+    )
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(formatter)
+    logger.addHandler(console_handler)
+
+    logger.propagate = False
+
+    return logger</code></pre>
+</details>
+<div class="desc"><p>Create a logger with both file and console handlers.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
+<dd>Name of the logger, typically <strong>name</strong> from the calling module</dd>
+<dt><strong><code>log_level</code></strong></dt>
+<dd>Logging level, defaults to DEBUG</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>logging.Logger</code></dt>
+<dd>Configured logger instance</dd>
+</dl></div>
+</dd>
+<dt id="Pipedrive.core.utils.train_model"><code class="name flex">
+<span>def <span class="ident">train_model</span></span>(<span>X, y)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def train_model(X, y):
+    &#34;&#34;&#34;
+    Train a linear regression model for loyalty prediction.
+
+    Args:
+        X (numpy.ndarray): Feature matrix for training
+        y (numpy.ndarray): Target values (loyalty scores)
+
+    Returns:
+        sklearn.linear_model.LinearRegression: Trained linear regression model
+
+    Note:
+        The model is automatically saved to &#39;models/loyalty_predictor.pkl&#39;
+        after training.
+
+    Raises:
+        FileNotFoundError: If the models directory doesn&#39;t exist
+        PermissionError: If there are insufficient permissions to save the model
+    &#34;&#34;&#34;
+    model = LinearRegression()
+    model.fit(X, y)
+
+    with open(constants.MODEL_PATH, &#34;wb&#34;) as f:
+        pickle.dump(model, f)
+
+    return model</code></pre>
+</details>
+<div class="desc"><p>Train a linear regression model for loyalty prediction.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>X</code></strong> :&ensp;<code>numpy.ndarray</code></dt>
+<dd>Feature matrix for training</dd>
+<dt><strong><code>y</code></strong> :&ensp;<code>numpy.ndarray</code></dt>
+<dd>Target values (loyalty scores)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>sklearn.linear_model.LinearRegression</code></dt>
+<dd>Trained linear regression model</dd>
+</dl>
+<h2 id="note">Note</h2>
+<p>The model is automatically saved to 'models/loyalty_predictor.pkl'
+after training.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>FileNotFoundError</code></dt>
+<dd>If the models directory doesn't exist</dd>
+<dt><code>PermissionError</code></dt>
+<dd>If there are insufficient permissions to save the model</dd>
+</dl></div>
+</dd>
+<dt id="Pipedrive.core.utils.wait_for_feature_group_creation_complete"><code class="name flex">
+<span>def <span class="ident">wait_for_feature_group_creation_complete</span></span>(<span>feature_group, logger)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def wait_for_feature_group_creation_complete(feature_group, logger):
+    &#34;&#34;&#34;
+    Monitor the creation status of a SageMaker Feature Group until completion.
+
+    Args:
+        feature_group: SageMaker Feature Group instance to monitor
+
+    Raises:
+        RuntimeError: If feature group creation fails
+
+    Note:
+        This function polls the feature group status every 5 seconds until
+        creation is complete or fails.
+    &#34;&#34;&#34;
+    status = feature_group.describe().get(&#34;FeatureGroupStatus&#34;)
+    while status == &#34;Creating&#34;:
+        logger.info(&#34;Waiting for Feature Group Creation&#34;)
+        sleep(5)
+        status = feature_group.describe().get(&#34;FeatureGroupStatus&#34;)
+
+    if status != &#34;Created&#34;:
+        raise RuntimeError(f&#34;Failed to create feature group {feature_group.name}&#34;)
+    logger.info(f&#34;FeatureGroup {feature_group.name} successfully created.&#34;)</code></pre>
+</details>
+<div class="desc"><p>Monitor the creation status of a SageMaker Feature Group until completion.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>feature_group</code></strong></dt>
+<dd>SageMaker Feature Group instance to monitor</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>RuntimeError</code></dt>
+<dd>If feature group creation fails</dd>
+</dl>
+<h2 id="note">Note</h2>
+<p>This function polls the feature group status every 5 seconds until
+creation is complete or fails.</p></div>
+</dd>
+<dt id="Pipedrive.core.utils.wait_for_offline_data_to_be_available"><code class="name flex">
+<span>def <span class="ident">wait_for_offline_data_to_be_available</span></span>(<span>feature_store_manager, s3_bucket_name, logger)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def wait_for_offline_data_to_be_available(
+    feature_store_manager, s3_bucket_name, logger
+):
+    &#34;&#34;&#34;
+    Monitor S3 bucket until offline store data becomes available.
+
+    Args:
+        feature_store_manager: Instance of FeatureStoreManager
+        s3_bucket_name (str): Name of the S3 bucket
+
+    Note:
+        This function polls the S3 bucket every 60 seconds until
+        the offline store data is available.
+    &#34;&#34;&#34;
+    access_key = os.getenv(&#34;AWS_ACCESS_KEY&#34;)
+    secret_key = os.getenv(&#34;AWS_SECRET_ACCESS_KEY&#34;)
+    aws_region = os.getenv(&#34;AWS_DEFAULT_REGION&#34;)
+
+    s3_client = boto3.client(
+        &#34;s3&#34;,
+        aws_access_key_id=access_key,
+        aws_secret_access_key=secret_key,
+        region_name=aws_region,
+    )
+    feature_group_resolved_output_s3_uri = (
+        feature_store_manager.feature_group.describe()
+        .get(&#34;OfflineStoreConfig&#34;)
+        .get(&#34;S3StorageConfig&#34;)
+        .get(&#34;ResolvedOutputS3Uri&#34;)
+    )
+    feature_group_s3_prefix = feature_group_resolved_output_s3_uri.replace(
+        f&#34;s3://{s3_bucket_name}/&#34;, &#34;&#34;
+    )
+    offline_store_contents = None
+
+    while offline_store_contents is None:
+        objects_in_bucket = s3_client.list_objects(
+            Bucket=s3_bucket_name, Prefix=feature_group_s3_prefix
+        )
+        if &#34;Contents&#34; in objects_in_bucket and len(objects_in_bucket[&#34;Contents&#34;]) &gt; 1:
+            offline_store_contents = objects_in_bucket[&#34;Contents&#34;]
+        else:
+            logger.info(&#34;Waiting for data in offline store...\n&#34;)
+            sleep(60)
+    logger.info(&#34;Data available.&#34;)</code></pre>
+</details>
+<div class="desc"><p>Monitor S3 bucket until offline store data becomes available.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>feature_store_manager</code></strong></dt>
+<dd>Instance of FeatureStoreManager</dd>
+<dt><strong><code>s3_bucket_name</code></strong> :&ensp;<code>str</code></dt>
+<dd>Name of the S3 bucket</dd>
+</dl>
+<h2 id="note">Note</h2>
+<p>This function polls the S3 bucket every 60 seconds until
+the offline store data is available.</p></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="Pipedrive.core" href="index.html">Pipedrive.core</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="Pipedrive.core.utils.engineer_features" href="#Pipedrive.core.utils.engineer_features">engineer_features</a></code></li>
+<li><code><a title="Pipedrive.core.utils.get_feature_value" href="#Pipedrive.core.utils.get_feature_value">get_feature_value</a></code></li>
+<li><code><a title="Pipedrive.core.utils.setup_logger" href="#Pipedrive.core.utils.setup_logger">setup_logger</a></code></li>
+<li><code><a title="Pipedrive.core.utils.train_model" href="#Pipedrive.core.utils.train_model">train_model</a></code></li>
+<li><code><a title="Pipedrive.core.utils.wait_for_feature_group_creation_complete" href="#Pipedrive.core.utils.wait_for_feature_group_creation_complete">wait_for_feature_group_creation_complete</a></code></li>
+<li><code><a title="Pipedrive.core.utils.wait_for_offline_data_to_be_available" href="#Pipedrive.core.utils.wait_for_offline_data_to_be_available">wait_for_offline_data_to_be_available</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.5</a>.</p>
+</footer>
+</body>
+</html>
