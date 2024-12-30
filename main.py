@@ -34,50 +34,6 @@ from core.inference import RealTimeInference
 import tests
 
 
-# def setup_aws_services():
-#     """
-#     Initialize and configure AWS service clients and sessions.
-
-#     Returns:
-#         tuple: Contains:
-#             - feature_store_session (Session): Configured SageMaker session
-#             - feature_store_runtime: Feature store runtime client
-#             - s3_bucket_name (str): Default S3 bucket name
-#             - aws_role (str): AWS IAM role ARN
-#             - aws_region (str): AWS region name
-
-#     Note:
-#         Requires appropriate AWS credentials and permissions to be configured.
-#     """
-#     load_dotenv()
-
-#     aws_role = os.getenv("AWS_ROLE")
-#     aws_region = boto3.Session().region_name
-
-#     boto_session = boto3.Session(region_name=aws_region)
-#     sagemaker_client = boto_session.client(
-#         service_name="sagemaker", region_name=aws_region
-#     )
-#     feature_store_runtime = boto_session.client(  # pylint: disable=W0621
-#         service_name="sagemaker-featurestore-runtime", region_name=aws_region
-#     )
-#     feature_store_session = Session(  # pylint: disable=W0621
-#         boto_session=boto_session,
-#         sagemaker_client=sagemaker_client,
-#         sagemaker_featurestore_runtime_client=feature_store_runtime,
-#     )
-
-#     s3_bucket_name = feature_store_session.default_bucket()  # pylint: disable=W0621
-
-#     return (
-#         feature_store_session,
-#         feature_store_runtime,
-#         s3_bucket_name,
-#         aws_role,
-#         aws_region,
-#     )
-
-
 def setup_aws_services():
     """
     Initialize and configure AWS service clients and sessions.
