@@ -40,11 +40,21 @@ el.replaceWith(d);
 <p>This module serves as the main entry point for the Customer Loyalty Prediction System.
 It orchestrates the complete workflow from data preparation to model training and inference,
 including AWS service setup and feature store operations.</p>
-<p>The workflow includes:
-1. Data preparation and feature engineering
-2. Feature group creation and data ingestion
-3. Model training with historical data
-4. Real-time inference pipeline execution</p>
+<p>The workflow includes:</p>
+<ol>
+<li>
+<p>Data preparation and feature engineering</p>
+</li>
+<li>
+<p>Feature group creation and data ingestion</p>
+</li>
+<li>
+<p>Model training with historical data</p>
+</li>
+<li>
+<p>Real-time inference pipeline execution</p>
+</li>
+</ol>
 <h2 id="note">Note</h2>
 <p>Ensure all required AWS credentials and permissions are properly configured
 before running this script.</p>
@@ -75,22 +85,27 @@ before running this script.</p>
             - s3_bucket_name (str): Default S3 bucket name
             - aws_role (str): AWS IAM role ARN
             - aws_region (str): AWS region name
-
-    Note:
-        Requires appropriate AWS credentials and permissions to be configured.
     &#34;&#34;&#34;
-    load_dotenv()
-
     aws_role = os.getenv(&#34;AWS_ROLE&#34;)
-    aws_region = boto3.Session().region_name
+    access_key = os.getenv(&#34;AWS_ACCESS_KEY&#34;)
+    secret_key = os.getenv(&#34;AWS_SECRET_ACCESS_KEY&#34;)
+    aws_region = os.getenv(&#34;AWS_DEFAULT_REGION&#34;)
 
-    boto_session = boto3.Session(region_name=aws_region)
+    if access_key and secret_key:
+        boto_session = boto3.Session(
+            aws_access_key_id=access_key, aws_secret_access_key=secret_key
+        )
+    else:
+        boto_session = boto3.Session()
+
     sagemaker_client = boto_session.client(
         service_name=&#34;sagemaker&#34;, region_name=aws_region
     )
+
     feature_store_runtime = boto_session.client(  # pylint: disable=W0621
         service_name=&#34;sagemaker-featurestore-runtime&#34;, region_name=aws_region
     )
+
     feature_store_session = Session(  # pylint: disable=W0621
         boto_session=boto_session,
         sagemaker_client=sagemaker_client,
@@ -117,9 +132,7 @@ before running this script.</p>
 - s3_bucket_name (str): Default S3 bucket name
 - aws_role (str): AWS IAM role ARN
 - aws_region (str): AWS region name</dd>
-</dl>
-<h2 id="note">Note</h2>
-<p>Requires appropriate AWS credentials and permissions to be configured.</p></div>
+</dl></div>
 </dd>
 </dl>
 </section>

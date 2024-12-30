@@ -47,9 +47,6 @@ and retrieval operations for customer purchase and loyalty data.</p>
 - Building training datasets
 - Managing customer-specific feature operations
 - Handling both batch and real-time feature updates</p>
-<h2 id="note">Note</h2>
-<p>This module requires appropriate AWS credentials and permissions to interact with
-SageMaker Feature Store and S3 services.</p>
 </section>
 <section>
 </section>
@@ -83,6 +80,7 @@ SageMaker Feature Store and S3 services.</p>
         feature_store_runtime: Runtime client for Feature Store operations
         aws_role (str): AWS IAM role ARN with necessary permissions
         feature_group (FeatureGroup): Feature group instance for storing customer features
+        logger (logging.Logger): unified logger object
     &#34;&#34;&#34;
 
     def __init__(
@@ -221,10 +219,6 @@ SageMaker Feature Store and S3 services.</p>
 
         Returns:
             dict: Dictionary containing the latest feature values for the customer
-
-        Note:
-            Returns features including latest purchase value, average purchase value,
-            latest loyalty score, and average loyalty score.
         &#34;&#34;&#34;
         response = self.feature_store_runtime.get_record(
             FeatureGroupName=&#34;customer_purchase_features&#34;,
@@ -342,6 +336,8 @@ online and offline feature stores.</p>
 <dd>AWS IAM role ARN with necessary permissions</dd>
 <dt><strong><code>feature_group</code></strong> :&ensp;<code>FeatureGroup</code></dt>
 <dd>Feature group instance for storing customer features</dd>
+<dt><strong><code>logger</code></strong> :&ensp;<code>logging.Logger</code></dt>
+<dd>unified logger object</dd>
 </dl>
 <p>Initialize the FeatureStoreManager with necessary AWS resources.</p>
 <h2 id="args">Args</h2>
@@ -584,10 +580,6 @@ the specified S3 bucket location.</p>
 
     Returns:
         dict: Dictionary containing the latest feature values for the customer
-
-    Note:
-        Returns features including latest purchase value, average purchase value,
-        latest loyalty score, and average loyalty score.
     &#34;&#34;&#34;
     response = self.feature_store_runtime.get_record(
         FeatureGroupName=&#34;customer_purchase_features&#34;,
@@ -621,10 +613,7 @@ the specified S3 bucket location.</p>
 <dl>
 <dt><code>dict</code></dt>
 <dd>Dictionary containing the latest feature values for the customer</dd>
-</dl>
-<h2 id="note">Note</h2>
-<p>Returns features including latest purchase value, average purchase value,
-latest loyalty score, and average loyalty score.</p></div>
+</dl></div>
 </dd>
 <dt id="Pipedrive.core.feature_store_manager.FeatureStoreManager.ingest_features"><code class="name flex">
 <span>def <span class="ident">ingest_features</span></span>(<span>self, features_df)</span>

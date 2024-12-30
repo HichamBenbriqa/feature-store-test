@@ -94,31 +94,28 @@ AWS credentials and permissions to function correctly.</p>
         3. Calculates latest and average values for purchases and loyalty scores
         4. Formats timestamps for Feature Store compatibility
     &#34;&#34;&#34;
-    # Convert purchase_timestamp to datetime
     historical_df[&#34;purchase_timestamp&#34;] = pd.to_datetime(
         historical_df[&#34;purchase_timestamp&#34;]
     )
 
-    # Group by customer_id to calculate features
     customer_features = (
         historical_df.groupby(&#34;customer_id&#34;)
         .agg(
             {
-                &#34;purchase_timestamp&#34;: &#34;max&#34;,  # Get the latest timestamp
+                &#34;purchase_timestamp&#34;: &#34;max&#34;,
                 &#34;purchase_value&#34;: [
                     &#34;last&#34;,
                     &#34;mean&#34;,
-                ],  # Get latest and average purchase
+                ],
                 &#34;loyalty_score&#34;: [
                     &#34;last&#34;,
                     &#34;mean&#34;,
-                ],  # Get latest and average loyalty score
+                ],
             }
         )
         .reset_index()
     )
 
-    # Flatten column names
     customer_features.columns = [
         &#34;customer_id&#34;,
         &#34;purchase_timestamp&#34;,
@@ -128,7 +125,6 @@ AWS credentials and permissions to function correctly.</p>
         &#34;latest_loyalty_score&#34;,
     ]
 
-    # Format timestamp
     customer_features[&#34;purchase_timestamp&#34;] = customer_features[
         &#34;purchase_timestamp&#34;
     ].dt.strftime(&#34;%Y-%m-%dT%H:%M:%S.%fZ&#34;)
@@ -221,44 +217,40 @@ doesn't exist, it will raise an IndexError.</p></div>
 <pre><code class="python">def setup_logger(name: str, log_level=logging.DEBUG) -&gt; logging.Logger:
     &#34;&#34;&#34;
     Create a logger with both file and console handlers.
-
     Args:
         name (str): Name of the logger, typically __name__ from the calling module
-        log_level: Logging level, defaults to INFO
-
+        log_level: Logging level, defaults to DEBUG
     Returns:
         logging.Logger: Configured logger instance
     &#34;&#34;&#34;
-    # Create logs directory if it doesn&#39;t exist
     logs_dir = &#34;logs&#34;
     if not os.path.exists(logs_dir):
         os.makedirs(logs_dir)
 
-    # Create logger
     logger = logging.getLogger(name)
+
+    logger.handlers.clear()
+
     logger.setLevel(log_level)
 
-    # Avoid adding handlers if they already exist
-    if not logger.handlers:
-        # Create formatter
-        formatter = logging.Formatter(
-            &#34;%(asctime)s - %(name)s - %(levelname)s - %(message)s&#34;,
-            datefmt=&#34;%Y-%m-%d %H:%M:%S&#34;,
-        )
+    formatter = logging.Formatter(
+        &#34;%(asctime)s - %(name)s - %(levelname)s - %(message)s&#34;,
+        datefmt=&#34;%Y-%m-%d %H:%M:%S&#34;,
+    )
 
-        # File handler with rotation
-        file_handler = RotatingFileHandler(
-            filename=f&#34;{logs_dir}/{name}.log&#34;,
-            maxBytes=10 * 1024 * 1024,  # 10MB
-            backupCount=5,
-        )
-        file_handler.setFormatter(formatter)
-        logger.addHandler(file_handler)
+    file_handler = RotatingFileHandler(
+        filename=f&#34;{logs_dir}/{name}.log&#34;,
+        maxBytes=10 * 1024 * 1024,
+        backupCount=5,
+    )
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
 
-        # Console handler
-        console_handler = logging.StreamHandler()
-        console_handler.setFormatter(formatter)
-        logger.addHandler(console_handler)
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(formatter)
+    logger.addHandler(console_handler)
+
+    logger.propagate = False
 
     return logger</code></pre>
 </details>
@@ -268,7 +260,7 @@ doesn't exist, it will raise an IndexError.</p></div>
 <dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
 <dd>Name of the logger, typically <strong>name</strong> from the calling module</dd>
 <dt><strong><code>log_level</code></strong></dt>
-<dd>Logging level, defaults to INFO</dd>
+<dd>Logging level, defaults to DEBUG</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
@@ -306,8 +298,6 @@ doesn't exist, it will raise an IndexError.</p></div>
     model = LinearRegression()
     model.fit(X, y)
 
-    # Save model locally
-    # with open(constants.MODEL_PATH) as f:
     with open(constants.MODEL_PATH, &#34;wb&#34;) as f:
         pickle.dump(model, f)
 
@@ -385,7 +375,7 @@ after training.</p>
 creation is complete or fails.</p></div>
 </dd>
 <dt id="Pipedrive.core.utils.wait_for_offline_data_to_be_available"><code class="name flex">
-<span>def <span class="ident">wait_for_offline_data_to_be_available</span></span>(<span>feature_store_manager, s3_bucket_name, AWS_REGION, logger)</span>
+<span>def <span class="ident">wait_for_offline_data_to_be_available</span></span>(<span>feature_store_manager, s3_bucket_name, logger)</span>
 </code></dt>
 <dd>
 <details class="source">
@@ -393,7 +383,7 @@ creation is complete or fails.</p></div>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def wait_for_offline_data_to_be_available(
-    feature_store_manager, s3_bucket_name, AWS_REGION, logger
+    feature_store_manager, s3_bucket_name, logger
 ):
     &#34;&#34;&#34;
     Monitor S3 bucket until offline store data becomes available.
@@ -401,13 +391,21 @@ creation is complete or fails.</p></div>
     Args:
         feature_store_manager: Instance of FeatureStoreManager
         s3_bucket_name (str): Name of the S3 bucket
-        AWS_REGION (str): AWS region identifier
 
     Note:
         This function polls the S3 bucket every 60 seconds until
         the offline store data is available.
     &#34;&#34;&#34;
-    s3_client = boto3.client(&#34;s3&#34;, region_name=AWS_REGION)
+    access_key = os.getenv(&#34;AWS_ACCESS_KEY&#34;)
+    secret_key = os.getenv(&#34;AWS_SECRET_ACCESS_KEY&#34;)
+    aws_region = os.getenv(&#34;AWS_DEFAULT_REGION&#34;)
+
+    s3_client = boto3.client(
+        &#34;s3&#34;,
+        aws_access_key_id=access_key,
+        aws_secret_access_key=secret_key,
+        region_name=aws_region,
+    )
     feature_group_resolved_output_s3_uri = (
         feature_store_manager.feature_group.describe()
         .get(&#34;OfflineStoreConfig&#34;)
@@ -437,8 +435,6 @@ creation is complete or fails.</p></div>
 <dd>Instance of FeatureStoreManager</dd>
 <dt><strong><code>s3_bucket_name</code></strong> :&ensp;<code>str</code></dt>
 <dd>Name of the S3 bucket</dd>
-<dt><strong><code>AWS_REGION</code></strong> :&ensp;<code>str</code></dt>
-<dd>AWS region identifier</dd>
 </dl>
 <h2 id="note">Note</h2>
 <p>This function polls the S3 bucket every 60 seconds until

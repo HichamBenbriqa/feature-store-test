@@ -96,6 +96,7 @@ for feature management and provides both batch and single-event prediction capab
             data_path (str, optional): Path to inference data.
                                        Defaults to constants.INFERENCE_DATA_PATH
             model_path (str, optional): Path to model file. Defaults to constants.MODEL_PATH
+            logger (logging.Logger): unified logger object
 
         Raises:
             FileNotFoundError: If model_path is invalid
@@ -152,17 +153,19 @@ for feature management and provides both batch and single-event prediction capab
             customer_features = self.feature_store_manager.get_latest_features(
                 customer_id
             )
-            return {
+            features = {
                 &#34;latest_purchase_value&#34;: purchase_value,
                 &#34;avg_purchase_value&#34;: float(customer_features[&#34;avg_purchase_value&#34;]),
                 &#34;avg_loyalty_score&#34;: float(customer_features[&#34;avg_loyalty_score&#34;]),
             }
+            return features
 
-        return {
+        features = {
             &#34;latest_purchase_value&#34;: purchase_value,
             &#34;avg_purchase_value&#34;: purchase_value,
             &#34;avg_loyalty_score&#34;: 0,
         }
+        return features
 
     def predict(self, features):
         &#34;&#34;&#34;
@@ -175,7 +178,6 @@ for feature management and provides both batch and single-event prediction capab
         Returns:
             float: Predicted loyalty score
         &#34;&#34;&#34;
-        # Convert features to DataFrame with named columns
         feature_df = pd.DataFrame(
             [
                 [
@@ -212,7 +214,7 @@ for feature management and provides both batch and single-event prediction capab
             self.feature_store_manager.update_customer_features(
                 customer_id,
                 purchase_amount,
-                prediction,  # Use predicted loyalty score as the new latest_loyalty_score
+                prediction,
             )
         else:
             self.logger.debug(f&#34;Inserting the records of the customer: {customer_id}&#34;)
@@ -236,13 +238,13 @@ for feature management and provides both batch and single-event prediction capab
                                  Expected to have &#39;customer_id&#39;, &#39;purchase_value&#39;,
                                  and &#39;purchase_timestamp&#39; fields.
         &#34;&#34;&#34;
-        if random.random() &lt; 0.2:  # 20% chance of high latency
-            delay = random.uniform(1, 3)  # High delay
+        if random.random() &lt; 0.2:
+            delay = random.uniform(1, 3)
             self.logger.debug(f&#34;Waiting for High delay: {delay}&#34;)
             time.sleep(delay)
 
         else:
-            delay = random.uniform(0.1, 0.5)  # Normal delay
+            delay = random.uniform(0.1, 0.5)
             self.logger.debug(f&#34;Waiting for Normal delay: {delay}&#34;)
             time.sleep(delay)
         customer_exists = self.feature_store_manager.customer_features_exist(
@@ -288,7 +290,7 @@ for feature management and provides both batch and single-event prediction capab
         &#34;&#34;&#34;
         self.get_inference_data()
 
-        failed_events = []  # Store failed events for retry
+        failed_events = []
         self.logger.info(f&#34;Total Events: {self.inference_data.shape}&#34;)
         for _, row in self.inference_data.iterrows():
             self.logger.info(f&#34;Received event: {row[&#39;customer_id&#39;]} &#34;)
@@ -318,43 +320,7 @@ for feature management and provides both batch and single-event prediction capab
                         f&#34;Failed to process event for customer {row[&#39;customer_id&#39;]} after retry: {e}&#34;
                     )
 
-        return self.inference_data
-
-    # def inference_pipeline(self):
-    #     &#34;&#34;&#34;
-    #     Execute the complete inference pipeline for batch predictions.
-
-    #     The pipeline:
-    #     1. Loads and prepares inference data
-    #     2. Processes each purchase event
-    #     3. Generates predictions for each event
-    #     4. Updates the feature store with new predictions
-    #     5. Adds predictions to the inference data
-
-    #     Returns:
-    #         pandas.DataFrame: Original inference data enriched with predictions
-
-    #     Note:
-    #         This method modifies the internal inference_data attribute by
-    #         adding a &#39;predictions&#39; column with the generated predictions.
-    #     &#34;&#34;&#34;
-    #     self.get_inference_data()
-    #     results = []
-
-    #     for _, row in self.inference_data.iterrows():
-    #         event = {
-    #             &#34;customer_id&#34;: str(row[&#34;customer_id&#34;]),
-    #             &#34;purchase_value&#34;: row[&#34;purchase_value&#34;],
-    #         }
-    #         features = self.process_event(event)
-    #         prediction = self.predict(features)
-    #         self.insert_customer_features(
-    #             str(row[&#34;customer_id&#34;]), row[&#34;purchase_value&#34;], prediction
-    #         )
-    #         results.append(prediction)
-
-    #     self.inference_data[&#34;predictions&#34;] = results
-    #     return self.inference_data</code></pre>
+        return self.inference_data</code></pre>
 </details>
 <div class="desc"><p>A class for handling real-time customer loyalty predictions and feature updates.</p>
 <p>This class manages the entire inference process, from loading the model and data
@@ -384,6 +350,8 @@ to processing events and updating the feature store with new predictions.</p>
 Defaults to constants.INFERENCE_DATA_PATH</dd>
 <dt><strong><code>model_path</code></strong> :&ensp;<code>str</code>, optional</dt>
 <dd>Path to model file. Defaults to constants.MODEL_PATH</dd>
+<dt><strong><code>logger</code></strong> :&ensp;<code>logging.Logger</code></dt>
+<dd>unified logger object</dd>
 </dl>
 <h2 id="raises">Raises</h2>
 <dl>
@@ -427,17 +395,19 @@ Defaults to constants.INFERENCE_DATA_PATH</dd>
         customer_features = self.feature_store_manager.get_latest_features(
             customer_id
         )
-        return {
+        features = {
             &#34;latest_purchase_value&#34;: purchase_value,
             &#34;avg_purchase_value&#34;: float(customer_features[&#34;avg_purchase_value&#34;]),
             &#34;avg_loyalty_score&#34;: float(customer_features[&#34;avg_loyalty_score&#34;]),
         }
+        return features
 
-    return {
+    features = {
         &#34;latest_purchase_value&#34;: purchase_value,
         &#34;avg_purchase_value&#34;: purchase_value,
         &#34;avg_loyalty_score&#34;: 0,
-    }</code></pre>
+    }
+    return features</code></pre>
 </details>
 <div class="desc"><p>Enrich purchase event with historical features for prediction.</p>
 <p>Combines current purchase data with historical features if customer exists in feature store,
@@ -530,7 +500,7 @@ and sorts records by timestamp in ascending order.</p>
     &#34;&#34;&#34;
     self.get_inference_data()
 
-    failed_events = []  # Store failed events for retry
+    failed_events = []
     self.logger.info(f&#34;Total Events: {self.inference_data.shape}&#34;)
     for _, row in self.inference_data.iterrows():
         self.logger.info(f&#34;Received event: {row[&#39;customer_id&#39;]} &#34;)
@@ -608,7 +578,7 @@ or updates made during the pipeline execution.</dd>
         self.feature_store_manager.update_customer_features(
             customer_id,
             purchase_amount,
-            prediction,  # Use predicted loyalty score as the new latest_loyalty_score
+            prediction,
         )
     else:
         self.logger.debug(f&#34;Inserting the records of the customer: {customer_id}&#34;)
@@ -649,7 +619,6 @@ or updates made during the pipeline execution.</dd>
     Returns:
         float: Predicted loyalty score
     &#34;&#34;&#34;
-    # Convert features to DataFrame with named columns
     feature_df = pd.DataFrame(
         [
             [
@@ -706,13 +675,13 @@ or updates made during the pipeline execution.</dd>
                              Expected to have &#39;customer_id&#39;, &#39;purchase_value&#39;,
                              and &#39;purchase_timestamp&#39; fields.
     &#34;&#34;&#34;
-    if random.random() &lt; 0.2:  # 20% chance of high latency
-        delay = random.uniform(1, 3)  # High delay
+    if random.random() &lt; 0.2:
+        delay = random.uniform(1, 3)
         self.logger.debug(f&#34;Waiting for High delay: {delay}&#34;)
         time.sleep(delay)
 
     else:
-        delay = random.uniform(0.1, 0.5)  # Normal delay
+        delay = random.uniform(0.1, 0.5)
         self.logger.debug(f&#34;Waiting for Normal delay: {delay}&#34;)
         time.sleep(delay)
     customer_exists = self.feature_store_manager.customer_features_exist(

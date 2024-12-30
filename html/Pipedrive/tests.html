@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="generator" content="pdoc3 0.11.5">
 <title>Pipedrive.tests API documentation</title>
-<meta name="description" content="">
+<meta name="description" content="Testing Module …">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
@@ -36,6 +36,13 @@ el.replaceWith(d);
 <h1 class="title">Module <code>Pipedrive.tests</code></h1>
 </header>
 <section id="section-intro">
+<p>Testing Module</p>
+<p>This module contains custom validation tests (not unit tests) to verify the functionality
+of the feature store implementation. These tests are designed to check:</p>
+<ul>
+<li>Feature engineering process</li>
+<li>Record insertion</li>
+</ul>
 </section>
 <section>
 </section>
@@ -44,212 +51,6 @@ el.replaceWith(d);
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="Pipedrive.tests.fetch_offline_store_data"><code class="name flex">
-<span>def <span class="ident">fetch_offline_store_data</span></span>(<span>feature_group)</span>
-</code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def fetch_offline_store_data(feature_group):
-    &#34;&#34;&#34;
-    Fetch all data from the offline feature store.
-
-    Args:
-        feature_group: SageMaker Feature Group object
-
-    Returns:
-        pd.DataFrame: Data from offline store
-    &#34;&#34;&#34;
-    query = feature_group.athena_query()
-    customer_table = query.table_name
-    query.run(
-        query_string=f&#34;SELECT * FROM {customer_table}&#34;,
-        output_location=f&#34;s3://{feature_group.sagemaker_session.default_bucket()}/feature-store/test_queries&#34;,
-    )
-    query.wait()
-    return query.as_dataframe()</code></pre>
-</details>
-<div class="desc"><p>Fetch all data from the offline feature store.</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>feature_group</code></strong></dt>
-<dd>SageMaker Feature Group object</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>pd.DataFrame</code></dt>
-<dd>Data from offline store</dd>
-</dl></div>
-</dd>
-<dt id="Pipedrive.tests.fetch_online_store_record"><code class="name flex">
-<span>def <span class="ident">fetch_online_store_record</span></span>(<span>featurestore_runtime, customer_id)</span>
-</code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def fetch_online_store_record(featurestore_runtime, customer_id):
-    &#34;&#34;&#34;
-    Fetch a customer&#39;s record from the online feature store.
-
-    Args:
-        featurestore_runtime: SageMaker Feature Store runtime client
-        customer_id: Customer ID to fetch
-
-    Returns:
-        dict: Customer&#39;s features from online store
-    &#34;&#34;&#34;
-    response = featurestore_runtime.get_record(
-        FeatureGroupName=constants.FEATURE_GROUP_NAME,
-        RecordIdentifierValueAsString=str(customer_id),
-    )
-    record = response[&#34;Record&#34;]
-
-    return {
-        &#34;customer_id&#34;: utils.get_feature_value(record, &#34;customer_id&#34;),
-        &#34;purchase_timestamp&#34;: utils.get_feature_value(record, &#34;purchase_timestamp&#34;),
-        &#34;latest_purchase_value&#34;: float(
-            utils.get_feature_value(record, &#34;latest_purchase_value&#34;)
-        ),
-    }</code></pre>
-</details>
-<div class="desc"><p>Fetch a customer's record from the online feature store.</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>featurestore_runtime</code></strong></dt>
-<dd>SageMaker Feature Store runtime client</dd>
-<dt><strong><code>customer_id</code></strong></dt>
-<dd>Customer ID to fetch</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>dict</code></dt>
-<dd>Customer's features from online store</dd>
-</dl></div>
-</dd>
-<dt id="Pipedrive.tests.get_latest_csv_record"><code class="name flex">
-<span>def <span class="ident">get_latest_csv_record</span></span>(<span>df, customer_id)</span>
-</code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def get_latest_csv_record(df, customer_id):
-    &#34;&#34;&#34;
-    Get the latest record for a customer from CSV data.
-
-    Args:
-        df (pd.DataFrame): DataFrame containing customer records
-        customer_id: Customer ID to look up
-
-    Returns:
-        pd.Series: Latest record for the customer
-    &#34;&#34;&#34;
-    customer_df = df[df[&#34;customer_id&#34;] == customer_id]
-    return customer_df.sort_values(&#34;purchase_timestamp&#34;, ascending=False).iloc[0]</code></pre>
-</details>
-<div class="desc"><p>Get the latest record for a customer from CSV data.</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>df</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
-<dd>DataFrame containing customer records</dd>
-<dt><strong><code>customer_id</code></strong></dt>
-<dd>Customer ID to look up</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>pd.Series</code></dt>
-<dd>Latest record for the customer</dd>
-</dl></div>
-</dd>
-<dt id="Pipedrive.tests.get_test_customers"><code class="name flex">
-<span>def <span class="ident">get_test_customers</span></span>(<span>csv_path, min_records=2, num_customers=10)</span>
-</code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def get_test_customers(csv_path, min_records=2, num_customers=10):
-    &#34;&#34;&#34;
-    Get random customers from CSV that have multiple records.
-
-    Args:
-        csv_path (str): Path to CSV file
-        min_records (int): Minimum number of records a customer should have
-        num_customers (int): Number of customers to select
-
-    Returns:
-        list: Selected customer IDs
-    &#34;&#34;&#34;
-    df = pd.read_csv(csv_path)
-    customer_counts = df[&#34;customer_id&#34;].value_counts()
-    eligible_customers = customer_counts[customer_counts &gt;= min_records].index.tolist()
-
-    if len(eligible_customers) &lt; num_customers:
-        raise ValueError(f&#34;Not enough customers with {min_records} or more records&#34;)
-
-    return np.random.choice(eligible_customers, num_customers, replace=False).tolist()</code></pre>
-</details>
-<div class="desc"><p>Get random customers from CSV that have multiple records.</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>csv_path</code></strong> :&ensp;<code>str</code></dt>
-<dd>Path to CSV file</dd>
-<dt><strong><code>min_records</code></strong> :&ensp;<code>int</code></dt>
-<dd>Minimum number of records a customer should have</dd>
-<dt><strong><code>num_customers</code></strong> :&ensp;<code>int</code></dt>
-<dd>Number of customers to select</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>list</code></dt>
-<dd>Selected customer IDs</dd>
-</dl></div>
-</dd>
-<dt id="Pipedrive.tests.setup_aws_session"><code class="name flex">
-<span>def <span class="ident">setup_aws_session</span></span>(<span>)</span>
-</code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def setup_aws_session():
-    &#34;&#34;&#34;
-    Set up AWS and SageMaker session objects.
-
-    Returns:
-        tuple: (feature_group, featurestore_runtime) - Configured Feature Group and runtime client
-    &#34;&#34;&#34;
-    boto_session = boto3.Session()
-    sagemaker_client = boto_session.client(service_name=&#34;sagemaker&#34;)
-    featurestore_runtime = boto_session.client(
-        service_name=&#34;sagemaker-featurestore-runtime&#34;
-    )
-    feature_store_session = Session(
-        boto_session=boto_session,
-        sagemaker_client=sagemaker_client,
-        sagemaker_featurestore_runtime_client=featurestore_runtime,
-    )
-
-    feature_group = FeatureGroup(
-        name=constants.FEATURE_GROUP_NAME, sagemaker_session=feature_store_session
-    )
-
-    return feature_group, featurestore_runtime</code></pre>
-</details>
-<div class="desc"><p>Set up AWS and SageMaker session objects.</p>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>tuple</code></dt>
-<dd>(feature_group, featurestore_runtime) - Configured Feature Group and runtime client</dd>
-</dl></div>
-</dd>
 <dt id="Pipedrive.tests.test_feature_engineering"><code class="name flex">
 <span>def <span class="ident">test_feature_engineering</span></span>(<span>historical_df, engineered_df)</span>
 </code></dt>
@@ -370,84 +171,6 @@ indicating successful retrieval and, by extension, successful insertion.</p>
 <dd>If the response does not contain a 'Record' key.</dd>
 </dl></div>
 </dd>
-<dt id="Pipedrive.tests.test_offline_store"><code class="name flex">
-<span>def <span class="ident">test_offline_store</span></span>(<span>)</span>
-</code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def test_offline_store():
-    &#34;&#34;&#34;
-    Test data consistency in the offline feature store.
-    Verifies that selected customers have at least 2 records.
-    &#34;&#34;&#34;
-    csv_path = &#34;data/inference_data.csv&#34;
-    feature_group, _ = setup_aws_session()
-
-    # Get test customers and offline data
-    test_customers = get_test_customers(csv_path)
-    print(f&#34;Testing offline store for customers: {test_customers}&#34;)
-
-    offline_df = fetch_offline_store_data(feature_group)
-
-    # Check each customer&#39;s records
-    for customer_id in test_customers:
-        customer_records = offline_df[offline_df[&#34;customer_id&#34;] == customer_id]
-        assert (
-            len(customer_records) &gt;= 2
-        ), f&#34;Customer {customer_id} has fewer than 2 records&#34;
-
-    print(&#34;✅ All customers have required number of records in offline store&#34;)</code></pre>
-</details>
-<div class="desc"><p>Test data consistency in the offline feature store.
-Verifies that selected customers have at least 2 records.</p></div>
-</dd>
-<dt id="Pipedrive.tests.test_online_store"><code class="name flex">
-<span>def <span class="ident">test_online_store</span></span>(<span>)</span>
-</code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def test_online_store():
-    &#34;&#34;&#34;
-    Test data consistency between online feature store and CSV data.
-    Compares purchase values and timestamps for selected customers.
-    &#34;&#34;&#34;
-    csv_path = &#34;data/inference_data.csv&#34;
-    _, featurestore_runtime = setup_aws_session()
-
-    # Get test customers and CSV data
-    test_customers = get_test_customers(csv_path)
-    print(f&#34;Testing online store for customers: {test_customers}&#34;)
-
-    df = pd.read_csv(csv_path)
-
-    # Compare records for each customer
-    for customer_id in test_customers:
-        csv_record = get_latest_csv_record(df, customer_id)
-        online_record = fetch_online_store_record(featurestore_runtime, customer_id)
-
-        csv_purchase = float(csv_record[&#34;purchase_value&#34;])
-        online_purchase = online_record[&#34;latest_purchase_value&#34;]
-
-        print(f&#34;\nCustomer: {customer_id}&#34;)
-        print(f&#34;CSV Purchase Value: {csv_purchase}&#34;)
-        print(f&#34;Online Purchase Value: {online_purchase}&#34;)
-        print(f&#34;CSV Timestamp: {csv_record[&#39;purchase_timestamp&#39;]}&#34;)
-        print(f&#34;Online Timestamp: {online_record[&#39;purchase_timestamp&#39;]}&#34;)
-
-        if abs(csv_purchase - online_purchase) &gt; 0.0001:
-            print(&#34;❌ Values don&#39;t match!&#34;)
-        else:
-            print(&#34;✅ Values match!&#34;)</code></pre>
-</details>
-<div class="desc"><p>Test data consistency between online feature store and CSV data.
-Compares purchase values and timestamps for selected customers.</p></div>
-</dd>
 </dl>
 </section>
 <section>
@@ -465,15 +188,8 @@ Compares purchase values and timestamps for selected customers.</p></div>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="Pipedrive.tests.fetch_offline_store_data" href="#Pipedrive.tests.fetch_offline_store_data">fetch_offline_store_data</a></code></li>
-<li><code><a title="Pipedrive.tests.fetch_online_store_record" href="#Pipedrive.tests.fetch_online_store_record">fetch_online_store_record</a></code></li>
-<li><code><a title="Pipedrive.tests.get_latest_csv_record" href="#Pipedrive.tests.get_latest_csv_record">get_latest_csv_record</a></code></li>
-<li><code><a title="Pipedrive.tests.get_test_customers" href="#Pipedrive.tests.get_test_customers">get_test_customers</a></code></li>
-<li><code><a title="Pipedrive.tests.setup_aws_session" href="#Pipedrive.tests.setup_aws_session">setup_aws_session</a></code></li>
 <li><code><a title="Pipedrive.tests.test_feature_engineering" href="#Pipedrive.tests.test_feature_engineering">test_feature_engineering</a></code></li>
 <li><code><a title="Pipedrive.tests.test_insertion" href="#Pipedrive.tests.test_insertion">test_insertion</a></code></li>
-<li><code><a title="Pipedrive.tests.test_offline_store" href="#Pipedrive.tests.test_offline_store">test_offline_store</a></code></li>
-<li><code><a title="Pipedrive.tests.test_online_store" href="#Pipedrive.tests.test_online_store">test_online_store</a></code></li>
 </ul>
 </li>
 </ul>

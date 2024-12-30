@@ -54,6 +54,7 @@ class RealTimeInference:
             data_path (str, optional): Path to inference data.
                                        Defaults to constants.INFERENCE_DATA_PATH
             model_path (str, optional): Path to model file. Defaults to constants.MODEL_PATH
+            logger (logging.Logger): unified logger object
 
         Raises:
             FileNotFoundError: If model_path is invalid
@@ -110,17 +111,19 @@ class RealTimeInference:
             customer_features = self.feature_store_manager.get_latest_features(
                 customer_id
             )
-            return {
+            features = {
                 "latest_purchase_value": purchase_value,
                 "avg_purchase_value": float(customer_features["avg_purchase_value"]),
                 "avg_loyalty_score": float(customer_features["avg_loyalty_score"]),
             }
+            return features
 
-        return {
+        features = {
             "latest_purchase_value": purchase_value,
             "avg_purchase_value": purchase_value,
             "avg_loyalty_score": 0,
         }
+        return features
 
     def predict(self, features):
         """
@@ -133,7 +136,6 @@ class RealTimeInference:
         Returns:
             float: Predicted loyalty score
         """
-        # Convert features to DataFrame with named columns
         feature_df = pd.DataFrame(
             [
                 [
@@ -170,7 +172,7 @@ class RealTimeInference:
             self.feature_store_manager.update_customer_features(
                 customer_id,
                 purchase_amount,
-                prediction,  # Use predicted loyalty score as the new latest_loyalty_score
+                prediction,
             )
         else:
             self.logger.debug(f"Inserting the records of the customer: {customer_id}")
@@ -194,13 +196,13 @@ class RealTimeInference:
                                  Expected to have 'customer_id', 'purchase_value',
                                  and 'purchase_timestamp' fields.
         """
-        if random.random() < 0.2:  # 20% chance of high latency
-            delay = random.uniform(1, 3)  # High delay
+        if random.random() < 0.2:
+            delay = random.uniform(1, 3)
             self.logger.debug(f"Waiting for High delay: {delay}")
             time.sleep(delay)
 
         else:
-            delay = random.uniform(0.1, 0.5)  # Normal delay
+            delay = random.uniform(0.1, 0.5)
             self.logger.debug(f"Waiting for Normal delay: {delay}")
             time.sleep(delay)
         customer_exists = self.feature_store_manager.customer_features_exist(
@@ -246,7 +248,7 @@ class RealTimeInference:
         """
         self.get_inference_data()
 
-        failed_events = []  # Store failed events for retry
+        failed_events = []
         self.logger.info(f"Total Events: {self.inference_data.shape}")
         for _, row in self.inference_data.iterrows():
             self.logger.info(f"Received event: {row['customer_id']} ")
@@ -277,147 +279,3 @@ class RealTimeInference:
                     )
 
         return self.inference_data
-
-    # def inference_pipeline(self):
-    #     """
-    #     Execute the complete inference pipeline for batch predictions.
-
-    #     The pipeline:
-    #     1. Loads and prepares inference data
-    #     2. Processes each purchase event
-    #     3. Generates predictions for each event
-    #     4. Updates the feature store with new predictions
-    #     5. Adds predictions to the inference data
-
-    #     Returns:
-    #         pandas.DataFrame: Original inference data enriched with predictions
-
-    #     Note:
-    #         This method modifies the internal inference_data attribute by
-    #         adding a 'predictions' column with the generated predictions.
-    #     """
-    #     self.get_inference_data()
-    #     results = []
-
-    #     for _, row in self.inference_data.iterrows():
-    #         event = {
-    #             "customer_id": str(row["customer_id"]),
-    #             "purchase_value": row["purchase_value"],
-    #         }
-    #         features = self.process_event(event)
-    #         prediction = self.predict(features)
-    #         self.insert_customer_features(
-    #             str(row["customer_id"]), row["purchase_value"], prediction
-    #         )
-    #         results.append(prediction)
-
-    #     self.inference_data["predictions"] = results
-    #     return self.inference_data
-
-
-# """summary"""
-
-# import pickle
-# import pandas as pd
-# from core import constants
-# from core.feature_store_manager import FeatureStoreManager
-
-
-# class RealTimeInference:
-#     """summary"""
-
-#     def __init__(
-#         self,
-#         feature_store_manager: FeatureStoreManager,
-#         data_path: str = constants.INFERENCE_DATA_PATH,
-#         model_path: str = constants.MODEL_PATH,
-#     ):
-#         self.feature_store_manager = feature_store_manager
-#         self.data_path = data_path
-#         self.infrence_data = None
-#         with open(model_path, "rb") as f:
-#             self.model = pickle.load(f)
-
-#     def get_inference_data(self):
-#         """summary"""
-#         self.infrence_data = pd.read_csv(self.data_path)
-#         self.infrence_data["purchase_timestamp"] = pd.to_datetime(
-#             self.infrence_data["purchase_timestamp"]
-#         )
-
-#         self.infrence_data = self.infrence_data.sort_values(
-#             "purchase_timestamp", ascending=True
-#         )
-
-#     def process_event(self, event):
-#         """Process a single real-time event"""
-#         customer_id = event["customer_id"]
-#         purchase_amount = float(event["purchase_value"])
-
-#         customer_exists = self.feature_store_manager.customer_features_exist(
-#             customer_id
-#         )
-
-#         if customer_exists:
-#             # Get historical features
-#             customer_features = self.feature_store_manager.get_latest_features(
-#                 customer_id
-#             )
-#             # in case customer already processed we enrich the data from feature store
-#             return {
-#                 "latest_purchase_value": purchase_amount,
-#                 "avg_purchase_value": float(customer_features["avg_purchase_value"]),
-#                 "avg_loyalty_score": float(customer_features["avg_loyalty_score"]),
-#             }
-#         return {
-#             "latest_purchase_value": purchase_amount,
-#             "avg_purchase_value": purchase_amount,
-#             "avg_loyalty_score": 0,
-#         }
-
-#     def predict(self, features):
-#         """summary"""
-#         return self.model.predict(
-#             [
-#                 [
-#                     features["latest_purchase_value"],
-#                     features["avg_purchase_value"],
-#                     features["avg_loyalty_score"],
-#                 ]
-#             ]
-#         )[0]
-
-#     def insert_customer_features(self, customer_id, purchase_amount, prediction):
-#         """summary"""
-#         # Update feature store with predicted loyalty score
-#         customer_exists = self.feature_store_manager.customer_features_exist(
-#             customer_id
-#         )
-#         if customer_exists:
-#             self.feature_store_manager.update_customer_features(
-#                 customer_id,
-#                 purchase_amount,
-#                 prediction,  # Use predicted loyalty score as the new latest_loyalty_score
-#             )
-#         else:
-#             self.feature_store_manager.add_customer_features(
-#                 customer_id, purchase_amount, prediction
-#             )
-
-#     def inference_pipeline(self):
-#         """summary"""
-#         self.get_inference_data()
-#         results = []
-#         for _, row in self.infrence_data.iterrows():
-#             event = {
-#                 "customer_id": str(row["customer_id"]),
-#                 "purchase_value": row["purchase_value"],
-#             }
-#             features = self.process_event(event)
-#             prediction = self.predict(features)
-#             self.insert_customer_features(
-#                 str(row["customer_id"]), row["purchase_value"], prediction
-#             )
-#             results.append(prediction)
-
-#         self.infrence_data["predictions"] = results

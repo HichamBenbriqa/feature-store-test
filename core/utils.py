@@ -32,44 +32,40 @@ from core import constants
 def setup_logger(name: str, log_level=logging.DEBUG) -> logging.Logger:
     """
     Create a logger with both file and console handlers.
-
     Args:
         name (str): Name of the logger, typically __name__ from the calling module
-        log_level: Logging level, defaults to INFO
-
+        log_level: Logging level, defaults to DEBUG
     Returns:
         logging.Logger: Configured logger instance
     """
-    # Create logs directory if it doesn't exist
     logs_dir = "logs"
     if not os.path.exists(logs_dir):
         os.makedirs(logs_dir)
 
-    # Create logger
     logger = logging.getLogger(name)
+
+    logger.handlers.clear()
+
     logger.setLevel(log_level)
 
-    # Avoid adding handlers if they already exist
-    if not logger.handlers:
-        # Create formatter
-        formatter = logging.Formatter(
-            "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-            datefmt="%Y-%m-%d %H:%M:%S",
-        )
+    formatter = logging.Formatter(
+        "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+    )
 
-        # File handler with rotation
-        file_handler = RotatingFileHandler(
-            filename=f"{logs_dir}/{name}.log",
-            maxBytes=10 * 1024 * 1024,  # 10MB
-            backupCount=5,
-        )
-        file_handler.setFormatter(formatter)
-        logger.addHandler(file_handler)
+    file_handler = RotatingFileHandler(
+        filename=f"{logs_dir}/{name}.log",
+        maxBytes=10 * 1024 * 1024,
+        backupCount=5,
+    )
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
 
-        # Console handler
-        console_handler = logging.StreamHandler()
-        console_handler.setFormatter(formatter)
-        logger.addHandler(console_handler)
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(formatter)
+    logger.addHandler(console_handler)
+
+    logger.propagate = False
 
     return logger
 
@@ -100,7 +96,7 @@ def wait_for_feature_group_creation_complete(feature_group, logger):
 
 
 def wait_for_offline_data_to_be_available(
-    feature_store_manager, s3_bucket_name, AWS_REGION, logger
+    feature_store_manager, s3_bucket_name, logger
 ):
     """
     Monitor S3 bucket until offline store data becomes available.
@@ -108,13 +104,21 @@ def wait_for_offline_data_to_be_available(
     Args:
         feature_store_manager: Instance of FeatureStoreManager
         s3_bucket_name (str): Name of the S3 bucket
-        AWS_REGION (str): AWS region identifier
 
     Note:
         This function polls the S3 bucket every 60 seconds until
         the offline store data is available.
     """
-    s3_client = boto3.client("s3", region_name=AWS_REGION)
+    access_key = os.getenv("AWS_ACCESS_KEY")
+    secret_key = os.getenv("AWS_SECRET_ACCESS_KEY")
+    aws_region = os.getenv("AWS_DEFAULT_REGION")
+
+    s3_client = boto3.client(
+        "s3",
+        aws_access_key_id=access_key,
+        aws_secret_access_key=secret_key,
+        region_name=aws_region,
+    )
     feature_group_resolved_output_s3_uri = (
         feature_store_manager.feature_group.describe()
         .get("OfflineStoreConfig")
@@ -188,31 +192,28 @@ def engineer_features(historical_df):
         3. Calculates latest and average values for purchases and loyalty scores
         4. Formats timestamps for Feature Store compatibility
     """
-    # Convert purchase_timestamp to datetime
     historical_df["purchase_timestamp"] = pd.to_datetime(
         historical_df["purchase_timestamp"]
     )
 
-    # Group by customer_id to calculate features
     customer_features = (
         historical_df.groupby("customer_id")
         .agg(
             {
-                "purchase_timestamp": "max",  # Get the latest timestamp
+                "purchase_timestamp": "max",
                 "purchase_value": [
                     "last",
                     "mean",
-                ],  # Get latest and average purchase
+                ],
                 "loyalty_score": [
                     "last",
                     "mean",
-                ],  # Get latest and average loyalty score
+                ],
             }
         )
         .reset_index()
     )
 
-    # Flatten column names
     customer_features.columns = [
         "customer_id",
         "purchase_timestamp",
@@ -222,7 +223,6 @@ def engineer_features(historical_df):
         "latest_loyalty_score",
     ]
 
-    # Format timestamp
     customer_features["purchase_timestamp"] = customer_features[
         "purchase_timestamp"
     ].dt.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
@@ -252,120 +252,7 @@ def train_model(X, y):
     model = LinearRegression()
     model.fit(X, y)
 
-    # Save model locally
-    # with open(constants.MODEL_PATH) as f:
     with open(constants.MODEL_PATH, "wb") as f:
         pickle.dump(model, f)
 
     return model
-
-
-# from time import sleep
-# import pandas as pd
-# import boto3
-# import pickle
-# from sklearn.linear_model import LinearRegression
-
-
-# def wait_for_feature_group_creation_complete(feature_group):
-#     status = feature_group.describe().get("FeatureGroupStatus")
-#     while status == "Creating":
-#         print("Waiting for Feature Group Creation")
-#         sleep(5)
-#         status = feature_group.describe().get("FeatureGroupStatus")
-#     if status != "Created":
-#         raise RuntimeError(f"Failed to create feature group {feature_group.name}")
-#     print(f"FeatureGroup {feature_group.name} successfully created.")
-
-
-# def wait_for_offline_data_to_be_available(
-#     feature_store_manager, s3_bucket_name, AWS_REGION
-# ):
-#     s3_client = boto3.client("s3", region_name=AWS_REGION)
-
-#     feature_group_resolved_output_s3_uri = (
-#         feature_store_manager.feature_group.describe()
-#         .get("OfflineStoreConfig")
-#         .get("S3StorageConfig")
-#         .get("ResolvedOutputS3Uri")
-#     )
-#     feature_group_s3_prefix = feature_group_resolved_output_s3_uri.replace(
-#         f"s3://{s3_bucket_name}/", ""
-#     )
-
-#     offline_store_contents = None
-#     while offline_store_contents is None:
-#         objects_in_bucket = s3_client.list_objects(
-#             Bucket=s3_bucket_name, Prefix=feature_group_s3_prefix
-#         )
-#         if "Contents" in objects_in_bucket and len(objects_in_bucket["Contents"]) > 1:
-#             offline_store_contents = objects_in_bucket["Contents"]
-#         else:
-#             print("Waiting for data in offline store...\n")
-#             sleep(60)
-
-#     print("Data available.")
-
-
-# def get_feature_value(record, feature_name):
-#     return str(
-#         list(filter(lambda r: r["FeatureName"] == feature_name, record))[0][
-#             "ValueAsString"
-#         ]
-#     )
-
-
-# def engineer_features(historical_df):
-#     """Calculate initial features from historical data"""
-#     # Convert purchase_timestamp to datetime
-#     historical_df["purchase_timestamp"] = pd.to_datetime(
-#         historical_df["purchase_timestamp"]
-#     )
-
-#     # Group by customer_id to calculate features
-#     customer_features = (
-#         historical_df.groupby("customer_id")
-#         .agg(
-#             {
-#                 "purchase_timestamp": "max",  # Get the latest timestamp
-#                 "purchase_value": [
-#                     "last",
-#                     "mean",
-#                 ],  # Get latest and average purchase
-#                 "loyalty_score": [
-#                     "last",
-#                     "mean",
-#                 ],  # Get latest and average loyalty score
-#             }
-#         )
-#         .reset_index()
-#     )
-
-#     # Flatten column names
-#     customer_features.columns = [
-#         "customer_id",
-#         "purchase_timestamp",
-#         "latest_purchase_value",
-#         "avg_purchase_value",
-#         "avg_loyalty_score",
-#         "latest_loyalty_score",
-#     ]
-
-#     # Format timestamp
-#     customer_features["purchase_timestamp"] = customer_features[
-#         "purchase_timestamp"
-#     ].dt.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
-
-#     return customer_features
-
-
-# def train_model(X, y):
-#     """Train a simple linear regression model"""
-#     model = LinearRegression()
-#     model.fit(X, y)
-
-#     # Save model locally
-#     with open("models/loyalty_predictor.pkl", "wb") as f:
-#         pickle.dump(model, f)
-
-#     return model
